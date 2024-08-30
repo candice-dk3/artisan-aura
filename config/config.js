@@ -4,7 +4,7 @@ config()
 
 const pool = createPool({
     host:process.env.HOST,
-    user:process.env.ROOT,
+    user:process.env.USER,
     database:process.env.DATABASE,
     password:process.env.PASSWORD,
 })
