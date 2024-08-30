@@ -8,18 +8,22 @@ const getItemsDb = async()=>{
 const getItemDb = async (id) =>{
   const [data] = await pool.query('SELECT * FROM items WHERE itemID = ?', [id]);
   if (!data) {
-    return null; // or throw an error
+    return null
   }
   return data;
 }
 
-const addItemDb = async(itemName, itemDesc, itemPrice, itemQuantity, itemCategory,itemURL)=>{
-  await pool.query(`
-      INSERT INTO items (itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL)
-      VALUES (?,?,?,?,?,?)
-      `,[itemName,itemDesc,itemPrice,itemQuantity,itemCategory,itemURL]);
-  return { message: 'Item added successfully' };
-}
+const addItemDb = async (itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL) => {
+    try {
+      await pool.query(`
+        INSERT INTO items (itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL)
+        VALUES (?,?,?,?,?,?)
+        `, [itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL]);
+      return { message: 'Item added successfully' };
+    } catch (error) {
+      return { message: 'Error adding item' };
+    }
+  };
 
 const deleteItemDb = async(itemID)=>{
   await pool.query('DELETE FROM items WHERE itemID = ?',[itemID]);
@@ -27,7 +31,8 @@ const deleteItemDb = async(itemID)=>{
 }
 
 const updateItemDb = async(itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, itemID)=>{
-  await pool.query('UPDATE items SET itemName = ?, itemDesc = ?, itemPrice = ?, itemQuantity = ?, itemCategory = ?, itemURL = ? WHERE itemID = ?',[itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, itemID]);
+  await pool.query('UPDATE items SET itemName = ?, itemDesc = ?, itemPrice = ?, itemQuantity = ?, itemCategory = ?, itemURL = ? WHERE itemID = ?',
+    [itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, itemID]);
   return { message: 'Item updated successfully' };
 }
 

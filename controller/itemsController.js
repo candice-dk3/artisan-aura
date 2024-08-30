@@ -25,15 +25,19 @@ const getItem = async (req, res) => {
 };
 
 const addItem = async (req, res) => {
-  try {
-    const { itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL } = req.body;
-    const newItem = await addItemDb(itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL);
-    res.json(newItem);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error adding item' });
-  }
-};
+    try {
+      const { itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL } = req.body;
+      
+    //   if (typeof itemPrice !== 'number' || isNaN(itemPrice)) {
+    //       throw new Error('Invalid item price. Please enter a valid number.');
+    //     }
+      const newItem = await addItemDb(itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL);
+      res.json(newItem);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error adding item' });
+    }
+  };
 
 const updateItem = async (req, res) => {
   try {
