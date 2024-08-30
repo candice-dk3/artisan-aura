@@ -1,37 +1,66 @@
-import {getItemsDb, getItemDb, addItemDb, deleteItemDb, updateItemDb} from '../model/itemsDb.js'
+import { getItemsDb, getItemDb, addItemDb, deleteItemDb, updateItemDb } from '../model/itemsDb.js';
 
-const getItems = async(req,res)=>{
-    res.json(await getItemsDb())  
-}
+const getItems = async (req, res) => {
+  try {
+    const items = await getItemsDb();
+    res.json(items);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching items' });
+  }
+};
 
-const getItem = async(req,res)=>{
-    res.json(await getItemDb(req.params.itemID))
-}
+const getItem = async (req, res) => {
+  try {
+    const item = await getItemDb(req.params.id);
+    if (!item) {
+      res.status(404).json({ message: 'Item not found' });
+    } else {
+      res.json(item);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching item' });
+  }
+};
 
-const addItem = async(req,res)=>{
-    let {itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL} = req.body; 
+const addItem = async (req, res) => {
+  try {
+    const { itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL } = req.body;
+    const newItem = await addItemDb(itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL);
+    res.json(newItem);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error adding item' });
+  }
+};
 
-    await addItemDb(itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL)
-    res.send('Data was inserted successfully')
-}
+const updateItem = async (req, res) => {
+  try {
+    const { itemID } = req.params;
+    const { itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL } = req.body;
+    const item = await getItemDb(itemID);
+    if (!item) {
+      res.status(404).json({ message: 'Item not found' });
+    } else {
+      await updateItemDb(itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL, itemID);
+      res.json({ message: 'Item updated successfully' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating item' });
+  }
+};
 
-const updateItem = async(req,res)=>{
-    let {itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL} = req.body;
-    let items = await getItemDb(req.params.itemID)
-    itemName? itemName=itemName : itemName = items.itemName
-    itemDesc? itemDesc=itemDesc : itemDesc = items.itemDesc
-    itemCategory? itemCategory=itemCategory : itemCategory = items.itemCategory
-    itemPrice? itemPrice=itemPrice : itemPrice = items.itemPrice
-    itemQuantity? itemQuantity=itemQuantity : itemQuantity = items.itemQuantity
-    itemURL? itemURL=itemURL : itemURL  = items.itemURL
+const deleteItem = async (req, res) => {
+  try {
+    const { itemID } = req.params;
+    await deleteItemDb(itemID);
+    res.json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error deleting item' });
+  }
+};
 
-    res.send('Updated was succesfully');
-    await updateItemDb(itemName, itemDesc, itemCategory, itemPrice, itemQuantity,itemURL,req.params.itemID)
-}
-
-const deleteItem = async(req,res)=>{
-    let {itemID} = req.body; 
-    await deleteItemDb(req.params.itemID)
-    res.send('Deleted successfully');
-}
-export {getItems, getItem, addItem, deleteItem, updateItem}
+export { getItems, getItem, addItem, deleteItem, updateItem }
