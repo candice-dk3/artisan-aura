@@ -27,10 +27,7 @@ const getItem = async (req, res) => {
 const addItem = async (req, res) => {
     try {
       const { itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL } = req.body;
-      
-    //   if (typeof itemPrice !== 'number' || isNaN(itemPrice)) {
-    //       throw new Error('Invalid item price. Please enter a valid number.');
-    //     }
+
       const newItem = await addItemDb(itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL);
       res.json(newItem);
     } catch (error) {
@@ -58,8 +55,8 @@ const updateItem = async (req, res) => {
 
 const deleteItem = async (req, res) => {
   try {
-    const { itemID } = req.params;
-    await deleteItemDb(itemID);
+    let {id }= req.body;
+    await deleteItemDb(req.params.id);
     res.json({ message: 'Item deleted successfully' });
   } catch (error) {
     console.error(error);
