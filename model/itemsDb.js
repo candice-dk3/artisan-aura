@@ -23,10 +23,10 @@ const addItemDb = async (itemName, itemDesc, itemPrice, itemQuantity, itemCatego
     } catch (error) {
       return { message: 'Error adding item' };
     }
-  };
+};
 
-const deleteItemDb = async(itemID)=>{
-  await pool.query('DELETE FROM items WHERE itemID = ?',[itemID]);
+const deleteItemDb = async(id)=>{
+  await pool.query('DELETE FROM items WHERE itemID = ?',[id]);
   return { message: 'Item deleted successfully' };
 }
 

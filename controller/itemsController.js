@@ -34,34 +34,34 @@ const addItem = async (req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Error adding item' });
     }
-  };
-
-const updateItem = async (req, res) => {
-  try {
-    const { itemID } = req.params;
-    const { itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL } = req.body;
-    const item = await getItemDb(itemID);
-    if (!item) {
-      res.status(404).json({ message: 'Item not found' });
-    } else {
-      await updateItemDb(itemName, itemDesc, itemCategory, itemPrice, itemQuantity, itemURL, itemID);
-      res.json({ message: 'Item updated successfully' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error updating item' });
-  }
 };
 
 const deleteItem = async (req, res) => {
-  try {
-    let {id }= req.body;
-    await deleteItemDb(req.params.id);
-    res.json({ message: 'Item deleted successfully' });
-  } catch (error) {
+    try {
+        let {id }= req.body;
+        await deleteItemDb(req.params.id);
+        res.json({ message: 'Item deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error deleting item' });
+    }
+}
+
+const updateItem = async (req, res) => {
+try {
+    const { id } = req.params;
+    const { itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, } = req.body;
+    const item = await getItemDb(id);
+    if (!item) {
+    res.status(404).json({ message: 'Item not found' });
+    } else {
+    await updateItemDb(itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, id);
+    res.json({ message: 'Item updated successfully' });
+    }
+} catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error deleting item' });
-  }
+    res.status(500).json({ message: 'Error updating item' });
+}
 };
 
 export { getItems, getItem, addItem, deleteItem, updateItem }
