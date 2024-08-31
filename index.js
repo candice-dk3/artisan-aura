@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors"
 import {itemRouter} from './routes/itemRoute.js'
-// import {userRouter} from './routes/userRoute.js'
+import {userRouter} from './routes/userRoute.js'
 
 let port = process.env.PORT || 1003
 
@@ -15,7 +15,7 @@ app.use(cors({
 app.use(express.static('public'))
 
 app.use('/items', itemRouter)
-// app.use('/users',userRouter)
+app.use('/users', userRouter)
 
 app.listen(port,(error)=>{
         if(error){ 
