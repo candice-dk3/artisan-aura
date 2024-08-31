@@ -16,7 +16,7 @@ const getItem = async (req, res) => {
     if (!item) {
       res.status(404).json({ message: 'Item not found' });
     } else {
-      res.json(item);
+      res.json(item)
     }
   } catch (error) {
     console.error(error);
