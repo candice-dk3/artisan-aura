@@ -1,39 +1,42 @@
-// import {pool} from '../config/config.js';
+import {pool} from '../config/config.js'
 
-// const getUsersDb = async()=>{
-//     let [data] = await pool.query('SELECT * FROM users');
-//     return data;
-// }
+const getUsersDb = async()=>{
+    let [data] =  await pool.query('SELECT * FROM users')
+    return(data)
+}
+console.log(await getUsersDb());
 
-// const getUserDb = async (id) =>{
-//     const [data] = await pool.query('SELECT * FROM users WHERE userID = ?', [id]);
-//     if (!data) {
-//       return null
-//     }
-//     return data;
-// }
+const getUserDb = async(emailAdd)=>{
+    let [[data]] = await pool.query('SELECT * FROM users WHERE emailAdd = ?',[emailAdd] )
+    return(data)
+}
 
-// const addUserDb = async (userFirstName, userLastName, userAge, userGender, userEmail, userUserName) => {
-//   try {
-//     await pool.query(`
-//       INSERT INTO user (itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL)
-//       VALUES (?,?,?,?,?,?)
-//       `, [itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL]);
-//     return { message: 'Item added successfully' };
-//   } catch (error) {
-//     return { message: 'Error adding item' };
-//   }
-// }
+const getUserIdDb = async(id)=>{
+    let [[data]] = await pool.query('SELECT * FROM users WHERE userID = ?',[id] )
+    return(data)
+}
 
-// const deleteUserDb = async(id)=>{
-//   await pool.query('DELETE FROM items WHERE itemID = ?',[id]);
-//   return { message: 'Item deleted successfully' };
-// }
+const insertUserDb  = async( firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)=>{
+    await pool.query(`INSERT INTO users(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) VALUES (?,?,?,?,?,?,?,?)`,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile ] )
+}
 
-// const updateUserDb = async(itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, itemID)=>{
-//   await pool.query('UPDATE items SET itemName = ?, itemDesc = ?, itemPrice = ?, itemQuantity = ?, itemCategory = ?, itemURL = ? WHERE itemID = ?',
-//     [itemName, itemDesc, itemPrice, itemQuantity, itemCategory, itemURL, itemID]);
-//   return { message: 'Item updated successfully' };
-// }
+const deleteUserDb = async(userID)=>{
+    await pool.query('DELETE FROM users WHERE usersID = ?',[userID] )
+}
 
-// export {getUsersDb, getUserDb, addUserDb, deleteUserDb, updateUserDb}
+const updateUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id)=>{//this order does not
+    await pool.query(`
+        UPDATE users 
+        SET firstName = ?,
+        lastName = ?,
+        userAge = ?,
+        Gender = ?,
+        userRole = ?, 
+        emailAdd = ?, 
+        userPass = ?, 
+        userProfile = ? 
+        WHERE usersID = ?
+        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id] )//this order matters
+}
+
+export{getUsersDb ,getUserDb, getUserIdDb, insertUserDb, deleteUserDb, updateUserDb} 
