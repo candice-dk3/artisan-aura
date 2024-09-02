@@ -21,7 +21,7 @@ const insertUserDb  = async( firstName, lastName, userAge, Gender, userRole, ema
 }
 
 const deleteUserDb = async(userID)=>{
-    await pool.query('DELETE FROM users WHERE usersID = ?',[userID] )
+    await pool.query('DELETE FROM users WHERE userID = ?',[userID] )
 }
 
 const updateUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id)=>{//this order does not
@@ -35,7 +35,7 @@ const updateUserDb = async(firstName, lastName, userAge, Gender, userRole, email
         emailAdd = ?, 
         userPass = ?, 
         userProfile = ? 
-        WHERE usersID = ?
+        WHERE userID = ?
         `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id] )//this order matters
 }
 
