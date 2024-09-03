@@ -24,7 +24,7 @@
               <div class="t-nav">              
                 <router-link to="/Cart" class="nav-link" @click="closeNavbar">Cart</router-link>
                 <router-link to="/SignUp" class="nav-link" @click="closeNavbar">Sign Up</router-link>
-                <router-link to="/SignIn" class="nav-link" @click="closeNavbar">Log In</router-link></div>
+                <router-link to="/Account" class="nav-link" @click="closeNavbar"><img :src="acclogo" alt="CK" class="acclogo"/></router-link></div>
             </div>
           </div>
         </div>
@@ -38,7 +38,8 @@ export default {
   name: 'NavBarComp',
   data() {
     return {
-      logo:'https://github.com/demilee06/Node-Images/blob/main/logo%20(1).png?raw=true'
+      logo:'https://github.com/demilee06/Node-Images/blob/main/logo%20(1).png?raw=true',
+      acclogo:'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/white-user.webp'
     }
   },
   methods: {
@@ -84,6 +85,10 @@ export default {
 }
 .logo{
   width: 1rem;
+}
+.acclogo{
+  width: 3rem;
+  border-radius: 50%;
 }
 .f-nav{
   display: grid;

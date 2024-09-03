@@ -4,15 +4,17 @@
 
             <div class="welcome">
                 <img :src="image" alt="Background-image" class="bg-image">
-                <h2 class="h2-text">Welcome To</h2>
-                <h1 class="h1-text">Artisan Aura</h1>
+                <div class="text-overlay">
+                    <h2 class="h2-text">Welcome To</h2>
+                    <h1 class="h1-text">Artisan Aura</h1>
+                </div>
             </div>
 
             <div class="SBC">
                 <h4 class="cText">Shop by category</h4>
                 <div class="categories">
                     <div class="paint-category">
-                        <img :src="categoryPaint" alt="" class="category-Paint">
+                        <img :src="categoryPaint" alt="" class="category-image">
                         <a href="/Items" class="category-text"><h5>Shop Paint</h5></a>
                     </div>
                     <div class="paintbrushes-category">
@@ -45,7 +47,7 @@
 export default {
     data(){
         return{
-            // image: 'https://github.com/candice-dk3/artisanAura-images/blob/master/person-painting-1.jpg?raw=true',
+            image: 'https://github.com/candice-dk3/artisanAura-images/blob/master/person-painting-1.jpg?raw=true',
             categoryPaint: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paint.jpeg?raw=true',
             categoryPBrushes: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-2.png?raw=true',
             categoryCanvas: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/canvas.webp',
@@ -62,15 +64,28 @@ export default {
     }
 
     /* Welcome Sect */
-    .bg-image{
-        background-attachment: scroll;
+    /* .bg-image {
+    width: 100%;
+    height: 20%;
+    object-fit: cover;
     }
+    .welcome {
+        background-size: cover;
+    } */
     .h2-text{
         font-size: 4rem;
         padding: 1rem;
     }
     .h1-text{
         font-size: 6rem;
+    }
+    .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: black;
     }
 
     /* Category Sect */

@@ -22,8 +22,8 @@ const routes = [
     component: () => import('../views/Items.vue')
   },
   {
-    path: '/$',
-    name: '',
+    path: '/items/:id',
+    name: 'Single Item',
     component: () => import('../views/Item.vue')
   },
   {
@@ -32,9 +32,9 @@ const routes = [
     component: () => import('../views/SignUp.vue')
   },
   {
-    path: '/SignIn',
-    name: 'SignIn',
-    component: () => import('../views/SignIn.vue')
+    path: '/Account',
+    name: 'Account',
+    component: () => import('../views/Account.vue')
   },
   {
     path: '/Cart',
