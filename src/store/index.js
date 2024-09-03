@@ -38,9 +38,10 @@ export default createStore({
         console.error('Error fetching items:', error);
       }
     },
-    async getItem({ commit }, itemID) {
+    async getItem({ commit }, id) {
       try {
-        const { data } = await axios.get(`${apiURL}items/${itemID}`);
+        const { data } = await axios.get(`${apiURL}items/${id}`);
+        console.log(data);
         commit('setItem', data);
       } catch (error) {
         console.error('Error fetching item:', error);
@@ -151,7 +152,7 @@ export default createStore({
     async deleteUser({ commit }, id) {
       try {
         await axios.delete(`${apiURL}users/delete/${id}`)
-        commit('setUsers', state.users.filter(user => user.userID !== id));
+        // commit('setUsers', state.users.filter(user => user.userID !== id));
         toast("User Deleted Successfully", {
           theme: "dark",
           type: "default",
@@ -163,7 +164,6 @@ export default createStore({
       }
     },
     async updateUser({ commit }, user) {
-      // console.log(id);
       try {
         const { data } = await axios.patch(`${apiURL}users/update/${user.userID}`, user)
         if (data.message) {
@@ -177,6 +177,21 @@ export default createStore({
       } catch (error) {
         console.log(error)
       }
+    },
+    async loginUser({commit}, info){
+      let {data}=  axios.post(`${apiURL}users/register`,info)
+      console.log(data);
+      $cookies.set('token',data.token)
+      if (data.message){
+        toast("Logged In Successfully", {
+          "theme": "dark",
+          "type": "default",
+          "position": "top-center",
+          "dangerouslyHTMLString": true
+        })
+      }
+      await router.push('/'),
+      location.reload()
     },
   },
   modules: {},

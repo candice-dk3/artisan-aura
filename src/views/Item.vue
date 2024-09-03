@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-          <button @click="$router.push('/items')">Continue Shopping</button>
+          <button @click="$router.push('/items/')">Continue Shopping</button>
         </div>
         <div v-else>
           <p>Loading item details...</p>
@@ -35,15 +35,16 @@
   <script>
   export default {
     methods: {
-      getItem() {
-        this.$store.dispatch('getItem',this.$route.params.id)
-      },
-      item() {
-        return this.$store.state.item;
-      },
-      purchaseAlert(itemName) {
-        alert(`You have purchased ${itemName}`);
-      },
+        getItem() {
+          this.$store.dispatch('getItem',this.$route.params.id)
+          // console.log(this.$store.item.itemName);
+        },
+        item() {
+          return this.$store.state.item;
+        },
+        purchaseAlert(itemName) {
+          alert(`You have purchased ${itemName}`);
+        },
     },
     mounted() {
       this.getItem();

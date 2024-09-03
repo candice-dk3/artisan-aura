@@ -64,7 +64,6 @@ export default {
     background-color: #C2922F;
     margin-top: 40px;
     border: none;
-    /* margin-left: 200px; */
 }
 
 button.btn:hover {

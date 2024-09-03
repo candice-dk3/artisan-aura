@@ -142,7 +142,6 @@ export default {
                 itemURL: '',
                 itemDesc: '',
             },
-            
             newUser: {
                 firstName: '',
                 lastName: '',
@@ -199,8 +198,6 @@ export default {
 <style scoped>
 .inner-admin {
     margin-top: 3.9rem;
-    /* background-image: url(https://github.com/demilee06/Node-Images/blob/main/5616868-hd_2048_1080_25fps-ezgif.com-optimize.gif?raw=true); */
-    background-size: contain
 }
 
 .table-responsive {
@@ -210,7 +207,6 @@ export default {
 
 .table {
     width: 80rem;
-    /* background-color: #96005A; */
     margin-top: 1rem;
 }
 
