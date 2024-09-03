@@ -17,26 +17,21 @@ const getUserIdDb = async(id)=>{
 }
 
 const insertUserDb  = async( firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile)=>{
-    await pool.query(`INSERT INTO users(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) VALUES (?,?,?,?,?,?,?,?)`,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile ] )
+    await pool.query(
+      `INSERT INTO
+       users(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) VALUES (?,?,?,?,?,?,?,?)
+      `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile ] )
 }
 
 const deleteUserDb = async(userID)=>{
     await pool.query('DELETE FROM users WHERE userID = ?',[userID] )
 }
 
-const updateUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id)=>{//this order does not
+const updateUserDb = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id)=>{
     await pool.query(`
         UPDATE users 
-        SET firstName = ?,
-        lastName = ?,
-        userAge = ?,
-        Gender = ?,
-        userRole = ?, 
-        emailAdd = ?, 
-        userPass = ?, 
-        userProfile = ? 
-        WHERE userID = ?
-        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id] )//this order matters
+        SET firstName = ?, lastName = ?, userAge = ?, Gender = ?, userRole = ?, emailAdd = ?,  userPass = ?,  userProfile = ? WHERE userID = ?
+        `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id] )
 }
 
 export{getUsersDb ,getUserDb, getUserIdDb, insertUserDb, deleteUserDb, updateUserDb} 

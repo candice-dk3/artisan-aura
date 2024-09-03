@@ -6,11 +6,8 @@ config()
 
 const checkUser = async (req, res, next) => {
     const { emailAdd, userPass } = req.body;
-
     let hashedPassword = (await getUserDb(emailAdd)).userPass;
-
     let result = await compare(userPass, hashedPassword);
-
     try {
         if (result == true) {
             let token = jwt.sign({ emailAdd: emailAdd }, process.env.SECRET_KEY, { expiresIn: '1hr' });
@@ -40,12 +37,10 @@ const checkUser = async (req, res, next) => {
 const verifyAToken = (req, res, next) => {
     let { cookie } = req.headers;
     let token = cookie && cookie.split('=')[1];
-
     if (!token) {
         res.status(401).json({ message: 'Token is missing' });
         return;
     }
-
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         if (err) {
             res.status(401).json({ message: 'Token is invalid' });
