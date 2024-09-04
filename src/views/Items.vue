@@ -1,6 +1,6 @@
 <template>
     <section class="items-sec">
-        <!-- <div>
+        <div>
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div>
             <div class="search-sort">
                 <div class="sort-by-bar">
@@ -29,6 +29,11 @@
                         <option value="Canvas">Canvas</option>
                         <option value="Stationary">Stationary</option>
                     </select>
+                    <select id="priceFilter" v-model="selectedPriceOrder">
+                    <option value="">Price:</option>
+                    <option value="asc">Low to High</option>
+                    <option value="desc">High to Low</option>
+                </select>
                 </div>
                 <div class="search-bar">
                     <div id="search-div">
@@ -36,20 +41,27 @@
                     </div>
                 </div>
             </div>
-            <div class="items" v-if="filteredItems">
+            <div class="items" v-if="filteredItems.length > 0">
                 <Card v-for="item in filteredItems" :key="item.itemID" class="item-card">
-                  <template #cardHeader>
-                      <img :src="item.itemURL" :alt="item.itemName" width="180rem" height="auto">
-                  </template>
-                  <template #cardBody>
-                      <h4 class="item-name">{{ item.itemName }}</h4>
-                      <p>Amount: {{ item.itemPrice }}</p>
-                      <button @click="addToCart()" >Purchase</button>
-                      <button @click="$router.push(`/items/${item.itemID}`)">View More</button>
-                  </template>
-              </Card>
+                    <template #cardHeader>
+                        <img :src="item.itemURL" :alt="item.itemName" width="180rem" height="auto">
+                    </template>
+                    <template #cardBody>
+                        <h4 class="item-name">{{ item.itemName }}</h4>
+                        <p>Price: R{{ item.itemPrice }}</p>
+                        <div class="quantity-container">
+                            <span class="available-quantity">Available: {{ item.itemQuantity }}</span>
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" v-model="selectedQuantity" min="1" :max="item.itemQuantity" value="1">
+                    </div>
+                    <div class="button-container">
+                        <button @click="addToCart(item)">Purchase</button>
+                        <button @click="$router.push(`/items/${item.itemID}`)">View More</button>
+                    </div>
+                    </template>
+                </Card>
             </div>
-            <div v-else>
+            <div v-else-if="searchQuery !== ''">
                 <p>No items found matching your search query.</p>
             </div>
         </div>
@@ -64,19 +76,28 @@ export default {
     },
     data(){
         return{
-            // paint: '',
-            // brushes: '',
-            // canvas: '',
-            // stationary: '',
+            paint: '',
+            brushes: '',
+            canvas: '',
+            stationary: '',
             searchQuery: '',
-            selectedCategory: ''
+            selectedCategory: '',
+             selectedPriceOrder: ''
         }
     },
     computed: {
-      filteredItems() {
+        filteredItems() {
           return this.$store.state.items.filter(item => {
           return item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
               (this.selectedCategory === '' || item.itemCategory === this.selectedCategory)
+          }).sort((a, b) => {
+              if (this.selectedPriceOrder === 'asc') {
+                  return a.itemPrice - b.itemPrice
+              } else if (this.selectedPriceOrder === 'desc') {
+                  return b.itemPrice - a.itemPrice
+              } else {
+                  return 0
+              }
           })
       }
     },
@@ -84,9 +105,9 @@ export default {
       getItems() {
         this.$store.dispatch('getItems')
     },
-    addToCart(){
-        this.$store.dispatch('addToCart')
-    },
+    addToCart(item) {
+            this.$store.dispatch('addToCart', { item, quantity: this.selectedQuantity })
+        },
         // purchaseAlert(prodName) {
         //     alert(`You have purchased ${prodName}`);
         // },
@@ -113,7 +134,7 @@ background-color: #f7f6f5;
 padding: 0.5rem;
 }
 
-#categoryFilter {
+#categoryFilter, #priceFilter {
 background-color: transparent;
 border: none;
 padding: 0.5rem;
@@ -134,32 +155,65 @@ justify-content: center;
 }
 
 .item-card {
-flex: 1 1 300px;
-max-width: 300px;
-height: auto;
-text-align: center;
-padding: 1rem;
-background-color: #fff4a5;
+  flex: 1 1 300px;
+  max-width: 320px;
+  height: 30rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: #fff4a5;
+  position: relative;
 }
 
-.item-image {
-max-width: 100%;
-height: auto;
+.item-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.button-container {
+  position: absolute;
+  /* top: 0.4rem; */
+  /* bottom: 2rem; */
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
 button {
-border: none;
-padding: 0.5rem 1rem;
-margin-top: 0.5rem;
-background-color: #1a9471;
-color: white;
-font-weight: bold;
-cursor: pointer;
-margin-left: 0.2rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  background-color: #1a9471;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 0.2rem;
 }
 
 button:hover {
 background-color: #f5e883;
+}
+
+.quantity-container {
+    margin-bottom: 1rem;
+}
+
+.quantity-container label {
+    margin-right: 0.5rem;
+}
+
+.quantity-container input[type="number"] {
+    width: 3rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f7f6f5;
+}
+
+.available-quantity {
+    margin-right: 1rem;
+    font-size: 0.9rem;
+    color: black;
 }
 /* .carousel-control-prev, .carousel-control-next{
   background-color: transparent;

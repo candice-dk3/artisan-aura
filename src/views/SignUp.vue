@@ -45,8 +45,8 @@
                 <h1>login</h1>
                 <table>
                     <tr>
-                        <th><label>Enter Username: </label></th>
-                        <td><input type="text" v-model="userProfile"></td>
+                        <th><label>Enter Email: </label></th>
+                        <td><input type="text" v-model="emailAdd"></td>
                     </tr>
                     <tr>
                         <th><label>Enter password: </label></th>
@@ -64,28 +64,45 @@
 export default {
     data(){
         return{
-                firstName: '',
-                lastName: '',
-                userAge: '',
-                Gender: '',
-                emailAdd: '',
-                userPass: '',
-                userProfile: '',
-                userRole: '',
+            firstName: '',
+            lastName: '',
+            userAge: '',
+            Gender: '',
+            emailAdd: '',
+            userPass: '',
+            userProfile: '',
+            userRole: '',
+            // signUp: 'true'
         }
     },
     methods:{
         insertUser() {
             this.$store.dispatch('insertUser', this.$data);
         },
-    },
-    computed:{
-        loginUser(){
-            this.$store.dispatch('loginUser',{userName:this.userName,userPass:this.userPass})
-            // console.log(userName);
-            
+        loginUser() {
+            if (this.emailAdd && this.userPass) {
+                try {
+                this.$store.dispatch('loginUser', {
+                    emailAdd: this.emailAdd,
+                    userPass: this.userPass
+                })
+                .then((response) => {
+                    console.log(response);
+                    // You can redirect to a different page here
+                    // this.$router.push('/');
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+                } catch (error) {
+                console.error(error);
+                }
+            } else {
+                console.log('Please fill in all fields');
+            }
         }
-    }
+    },
+  
 }
 </script>
 <style scoped>

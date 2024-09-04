@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
-// import router from './router';
+import router from './index.js';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -178,21 +178,20 @@ export default createStore({
         console.log(error)
       }
     },
-    async loginUser({commit}, info){
-      let {data}=  axios.post(`${apiURL}users/register`,info)
-      console.log(data);
-      $cookies.set('token',data.token)
-      if (data.message){
-        toast("Logged In Successfully", {
-          "theme": "dark",
-          "type": "default",
-          "position": "top-center",
-          "dangerouslyHTMLString": true
-        })
-      }
-      await router.push('/'),
-      location.reload()
-    },
+    loginUser({ commit }, info) {
+      axios.post(`${apiURL}users/login`, info)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        // Store the token in local storage or cookies
+        localStorage.setItem('token', data.token);
+        // You can redirect to a different page here
+        // router.push('/');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }  
   },
   modules: {},
 });

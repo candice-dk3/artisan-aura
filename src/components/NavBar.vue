@@ -55,7 +55,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 20px;
-  background-color: #052931;
+  background-color: #ED8D8D;
 }
 
 .offcanvas-body a {
@@ -71,7 +71,7 @@ export default {
   transition-duration: 2sec;
 }
 .navbar{
-  background-color: #052931;
+  background-color: #ED8D8D;
   width: 100%;
 }
 .navbar-nav {

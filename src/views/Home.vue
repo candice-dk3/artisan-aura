@@ -33,13 +33,17 @@
             </div>
 
             <div class="BSI">
-                <div class="bText">
-                    <h4>Browse some of our best selling items</h4>
-                </div>
-                <div class="bsItems">
-
+            <div class="bText">
+                <h4>Browse some of our best selling items</h4>
+            </div>
+            <div class="bsItems">
+                <div v-for="(item, index) in bestSellingItems" :key="index" class="bsItem">
+                    <img :src="item.itemURL" alt="" class="bsItemImage">
+                    <h5>{{ item.itemName }}</h5>
+                    <p>{{ item.itemDesc }}</p>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 </template>
@@ -51,27 +55,44 @@ export default {
             categoryPaint: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paint.jpeg?raw=true',
             categoryPBrushes: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-2.png?raw=true',
             categoryCanvas: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/canvas.webp',
-            categoryStationary: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/stationary.webp'
+            categoryStationary: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/stationary.webp',
+            bestSellingItems: [
+                {
+                    itemURL: '',
+                    itemName: '',
+                    itemDesc: ''
+                },
+                {
+                    itemURL: '',
+                    itemName: '',
+                    itemDesc: ''
+                },
+                {
+                    itemURL: '',
+                    itemName: '',
+                    itemDesc: ''
+                }
+            ]
         }
     }
 }
 </script>
 <style scoped>
     .home-sec{
-        background-color: #CD8A65;
+        background-color: #8D6262;
         height: auto;
         margin-top: 4.9rem;
     }
 
     /* Welcome Sect */
-    /* .bg-image {
+    .bg-image {
     width: 100%;
-    height: 20%;
-    object-fit: cover;
+    height: 30rem;
+    /* object-fit: cover; */
     }
     .welcome {
         background-size: cover;
-    } */
+    }
     .h2-text{
         font-size: 4rem;
         padding: 1rem;
@@ -123,11 +144,28 @@ export default {
         text-decoration: none;
     }
 
+    /* Best Selling items */
+    .bsItems {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
 
-    @media screen and (max-width: 300px){
-        .categories{
+    .bsItemImage {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 10rem;
+        padding: 2rem;
+    }
+
+@media screen and (max-width: 390px){
+    .categories{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
     }
+    .bsItems {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
     }
+}
 </style>

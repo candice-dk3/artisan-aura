@@ -21,7 +21,7 @@ export default {
 </script>
 <style scoped>
 footer{
-    background-color: #052931;
+    background-color: #ED8D8D;
     height: 15rem;
 }
 .h4-footer{
@@ -34,8 +34,8 @@ footer{
     grid-template-columns: repeat(3, 1fr);
 }
 .contact-us {
-        display: grid;
-        grid-template-rows: repeat(2, 1fr);
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
 }
 a{
     color: white;
