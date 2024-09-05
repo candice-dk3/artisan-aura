@@ -14,6 +14,6 @@ userRouter.patch('/update/:id',updateUser)
 
 userRouter.delete('/delete/:id',deleteUser)
 
-userRouter.post('/login', loginUser, checkUser, verifyAToken)
+userRouter.post('/login',checkUser, loginUser)
 
 export{userRouter}

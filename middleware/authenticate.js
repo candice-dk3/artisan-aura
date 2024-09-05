@@ -6,21 +6,27 @@ config()
 
 const checkUser = async (req, res, next) => {
     const { emailAdd, userPass } = req.body;
-    let hashedPassword = (await getUserDb(emailAdd)).userPass;
+    let user = await getUserDb(emailAdd)
+    let hashedPassword = user.userPass
+    // console.log(hashedPassword)
     let result = await compare(userPass, hashedPassword);
+    // console.log(result);
+    
     try {
         if (result == true) {
             let token = jwt.sign({ emailAdd: emailAdd }, process.env.SECRET_KEY, { expiresIn: '1hr' });
             console.log(token);
             jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+                console.log(token);
                 if (err) {
                     res.json({ message: 'Token is invalid' });
                 } else {
                     req.body.emailAdd = decoded.emailAdd;
-                    res.json({ message: 'Token is valid' });
+                    // res.json({ message: 'Token is valid' });
                 }
             });
             req.body.token = token;
+            console.log(token)
             next();
             return;
         } else {

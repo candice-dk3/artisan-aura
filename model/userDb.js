@@ -8,7 +8,7 @@ console.log(await getUsersDb());
 
 const getUserDb = async(emailAdd)=>{
     let [[data]] = await pool.query('SELECT * FROM users WHERE emailAdd = ?',[emailAdd] )
-    return(data)
+    return data?data:''
 }
 
 const getUserIdDb = async(id)=>{
