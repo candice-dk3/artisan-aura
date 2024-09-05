@@ -9,7 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(cors({
     origin: '*',
-    Credentials:true
+    credentials:true
 }))
 
 app.use(express.static('public'))
