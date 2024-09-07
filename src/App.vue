@@ -47,6 +47,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: white;
+  background-color: #e2b65f;;
 }
 html{
     scroll-behavior: smooth;

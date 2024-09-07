@@ -3,17 +3,22 @@ import axios from 'axios';
 import router from './index.js';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import {useCookies} from 'vue-cookies'
 
 const apiURL = 'https://artisan-aura.onrender.com/';
+axios.defaults.withCredentials= true
+axios.defaults.headers =$cookies.get('token')
 
 export default createStore({
   state: {
     items: [],
     users: [],
+    cart: [],
     item: null,
     user: null,
   },
   getters:{
+    cart: state => state.cart
   },
   mutations: {
     setItems(state, payload) {
@@ -28,6 +33,14 @@ export default createStore({
     setUser(state, payload) {
       state.user = payload;
     },
+    addToCart(state, { item, quantity }) {
+      const cartItem = state.cart.find(cartItem => cartItem.itemID === item.itemID)
+      if (cartItem) {
+          cartItem.quantity += quantity
+      } else {
+          state.cart.push({ item, quantity })
+      }
+  }
   },
   actions: {
     async getItems({ commit }) {
@@ -47,22 +60,10 @@ export default createStore({
         console.error('Error fetching item:', error);
       }
     },
-    async addToCart({ commit }, item) {
-      try {
-        const { data } = await axios.post(`${apiURL}cart`, item);
-        console.log('Added to cart:', data);
-        if (data) {
-          toast(`${item.itemName} Has Been Added To Cart`, {
-            theme: 'dark',
-            type: 'default',
-            position: 'top-center',
-            dangerouslyHTMLString: true,
-          });
-        }
-      } catch (error) {
-        console.error('Error adding to cart:', error);
-      }
-    },
+    addToCart({ commit }, { item, quantity }) {
+      console.log('Item Added to cart');
+      commit('addToCart', { item, quantity })
+  },
     async addItem({ commit }, item) {
       try {
         const response = await axios.post(`${apiURL}items/add`, item);
@@ -178,20 +179,21 @@ export default createStore({
         console.log(error)
       }
     },
-    loginUser({ commit }, info) {
-      axios.post(`${apiURL}users/login`, info)
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        // Store the token in local storage or cookies
-        localStorage.setItem('token', data.token);
-        // You can redirect to a different page here
-        // router.push('/');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    }  
+    async loginUser({ commit }, info) {
+      console.log(info);
+      let { data } = await axios.post(`${apiURL}users/login`, info);
+      console.log(data);
+      $cookies.set('token', data.token);
+      if (data.message) {
+        toast("Logged In Successfully", {
+          "theme": "dark",
+          "type": "default",
+          "position": "top-center",
+          "dangerouslyHTMLString": true
+        });
+      }
+      // Remove the router.push and location.reload() from here
+    }
   },
   modules: {},
 });

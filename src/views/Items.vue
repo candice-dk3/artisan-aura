@@ -50,9 +50,8 @@
                         <h4 class="item-name">{{ item.itemName }}</h4>
                         <p>Price: R{{ item.itemPrice }}</p>
                         <div class="quantity-container">
-                            <span class="available-quantity">Available: {{ item.itemQuantity }}</span>
                             <label for="quantity">Quantity:</label>
-                            <input type="number" id="quantity" v-model="selectedQuantity" min="1" :max="item.itemQuantity" value="1">
+                            <input type="number" id="quantity" v-model="item.quantity"  min="1" :max="item.itemQuantity" value="1">
                     </div>
                     <div class="button-container">
                         <button @click="addToCart(item)">Purchase</button>
@@ -82,32 +81,39 @@ export default {
             stationary: '',
             searchQuery: '',
             selectedCategory: '',
-             selectedPriceOrder: ''
+            selectedPriceOrder: '',
+            selectedQuantity: '',
+            items: []
         }
     },
     computed: {
-        filteredItems() {
-          return this.$store.state.items.filter(item => {
-          return item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-              (this.selectedCategory === '' || item.itemCategory === this.selectedCategory)
-          }).sort((a, b) => {
-              if (this.selectedPriceOrder === 'asc') {
-                  return a.itemPrice - b.itemPrice
-              } else if (this.selectedPriceOrder === 'desc') {
-                  return b.itemPrice - a.itemPrice
-              } else {
-                  return 0
-              }
-          })
-      }
-    },
+    filteredItems() {
+        return this.$store.state.items.map(item => {
+            return {
+                ...item,
+                quantity: 0 // add a quantity property to each item
+            }
+        }).filter(item => {
+            return item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
+                (this.selectedCategory === '' || item.itemCategory === this.selectedCategory)
+        }).sort((a, b) => {
+            if (this.selectedPriceOrder === 'asc') {
+                return a.itemPrice - b.itemPrice
+            } else if (this.selectedPriceOrder === 'desc') {
+                return b.itemPrice - a.itemPrice
+            } else {
+                return 0
+            }
+        })
+    }
+},
     methods : {
       getItems() {
         this.$store.dispatch('getItems')
     },
     addToCart(item) {
-            this.$store.dispatch('addToCart', { item, quantity: this.selectedQuantity })
-        },
+        this.$store.dispatch('addToCart', { item, quantity: item.quantity })
+    },
         // purchaseAlert(prodName) {
         //     alert(`You have purchased ${prodName}`);
         // },
@@ -119,7 +125,7 @@ export default {
 </script>
 <style scoped>
 .items-sec{
-  margin-top: 4.9rem;
+    margin-top: 6.9rem;
 }
 .search-sort {
 display: flex;

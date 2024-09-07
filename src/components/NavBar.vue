@@ -14,12 +14,12 @@
           </div>
           <div class="offcanvas-body">
             <div class="navbar-nav">
+              <div class="s-nav">
+                  <router-link to="/" class="nav-link" @click="closeNavbar"><img :src="logo" alt="CK" class="logo"/></router-link>
+              </div>
               <div class="f-nav">
                   <router-link to="/" class="nav-link" @click="closeNavbar">Home</router-link>
                   <router-link to="/Items" class="nav-link" @click="closeNavbar">Products</router-link>
-              </div>
-              <div class="s-nav">
-                  <router-link to="/" class="nav-link" @click="closeNavbar"><img :src="logo" alt="CK" class="logo"/></router-link>
               </div>
               <div class="t-nav">              
                 <router-link to="/Cart" class="nav-link" @click="closeNavbar">Cart</router-link>
@@ -38,8 +38,8 @@ export default {
   name: 'NavBarComp',
   data() {
     return {
-      logo:'https://github.com/demilee06/Node-Images/blob/main/logo%20(1).png?raw=true',
-      acclogo:'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/white-user.webp'
+      logo:'https://github.com/candice-dk3/artisanAura-images/blob/master/artisan%20aura%20lo%20cfab7f95-b73f-4e66-914c-b7397d070d9f%20(2).png?raw=true',
+      acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-user-90.png?raw=true'
     }
   },
   methods: {
@@ -55,7 +55,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 20px;
-  background-color: #ED8D8D;
+  background-color: #B692C2;
 }
 
 .offcanvas-body a {
@@ -65,13 +65,16 @@ export default {
   text-decoration: none;
   padding: 1rem;
 }
+.offcanvas-body a:hover {
+  color: #ffc400;
+}
 
 .offcanvas-body a.router-link-exact-active {
   color: #ffc400;
-  transition-duration: 2sec;
+  /* transition-duration: 2sec; */
 }
 .navbar{
-  background-color: #ED8D8D;
+  background-color: #B692C2;
   width: 100%;
 }
 .navbar-nav {
@@ -84,32 +87,39 @@ export default {
   padding-left: 20px;
 }
 .logo{
-  width: 1rem;
+  width: 7rem;
+  float: left;
+  margin-top: -2rem;
 }
 .acclogo{
-  width: 3rem;
-  border-radius: 50%;
+  width: 2.4rem;
+  padding: 0.2rem;
 }
 .f-nav{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding: 1rem;
 }
 .t-nav{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  padding: 1rem;
 }
 .navbar-nav .nav-link {
   padding-right: 1rem;
   padding-left: 1rem;
 }
-
+/* 
 nav a {
   font-weight: bold;
   font-size: 20px;
   color: white;
   text-decoration: none;
-  padding: 1.3rem;
+  padding: 1.8rem;
 }
+nav a:hover {
+  color: #ffc400;
+} */
 @media screen and (max-width: 300px) {
       .offcanvas-body a {
       font-size: 14px;
@@ -118,7 +128,7 @@ nav a {
       .navbar-nav {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      /* width: 100%; */
+      width: 100%;
       height: auto;
       }
       .s-nav{
@@ -139,7 +149,7 @@ nav a {
       padding: 1rem;
     }
     .offcanvas-header{
-      background-color: #8d6149;
+      background-color: #B692C2;
     }
 }
 </style>

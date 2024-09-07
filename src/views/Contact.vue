@@ -21,7 +21,7 @@ export default {
 </script>
 <style scoped>
 .contact-sec{
-    margin-top: 5rem;
+  margin-top: 6.9rem;
 }
 .form-sec {
     margin: 0 auto;

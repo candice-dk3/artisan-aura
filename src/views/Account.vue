@@ -1,11 +1,18 @@
 <template>
     <div class="account">
-        <div v-if="user()">
-            {{ $store.state.user.userName  }}
+      <h1>View Account</h1>
+      <div class="account">
+        <div class="pp"></div>
+        <div class="accDets"></div>
+      </div>
+      <div v-if="user()">
+            {{ $store.state.user.firstName  }}
         </div>
     </div>
 </template>
+
 <script>
+
  export default {
     methods: {
       getUser() {
@@ -19,9 +26,12 @@
       this.getUser();
     },
   };
+
 </script>
+
 <style scoped>
     .account{
-        margin-top:10rem;
+      margin-top: 6.9rem;
+        color: black;
     }
 </style>

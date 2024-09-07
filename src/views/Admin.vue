@@ -173,12 +173,18 @@ export default {
         insertUser() {
             this.$store.dispatch('insertUser', this.newUser);
         },
-        deleteUser(user) {
-            this.$store.dispatch('deleteUser', user.userID)
-        },
         deleteItem(item) {
             this.$store.dispatch('deleteItem', item.itemID)
-        }
+            .then(() => {
+                this.$router.go();
+        });
+        },
+        deleteUser(user) {
+            this.$store.dispatch('deleteUser', user.userID)
+            .then(() => {
+                this.$router.go();
+        });
+        },
     },
     computed: {
         item(){
@@ -197,7 +203,7 @@ export default {
 
 <style scoped>
 .inner-admin {
-    margin-top: 3.9rem;
+    margin-top: 6.9rem;
 }
 
 .table-responsive {
@@ -208,6 +214,7 @@ export default {
 .table {
     width: 80rem;
     margin-top: 1rem;
+    background-color: transparent;
 }
 
 .table th,
@@ -236,7 +243,7 @@ export default {
 
 .btn {
     color: white;
-    background-color: #C2922F;
+    background-color: #ffc400;
     margin-top: 40px;
     border: none;
     /* margin-left: 200px; */

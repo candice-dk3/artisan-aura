@@ -23,6 +23,7 @@ export default {
 .loader-container {
   position: relative;
   height: 100vh;
+  background: white;
 }
 .loader {
   position: absolute;
