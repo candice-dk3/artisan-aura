@@ -16,6 +16,17 @@ app.use(express.static('public'))
 
 app.use('/items', itemRouter)
 app.use('/users', userRouter)
+app.post('/cart/add', async (req, res) => {
+    try {
+      const { itemID, quantity } = req.body;
+      const userID = req.user.ID;
+      const cartItem = await Cart.create({ userID, itemID, quantity });
+      res.json(cartItem);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      res.status(500).json({ message: 'Error adding item to cart' });
+    }
+  });
 
 app.listen(port,(error)=>{
         if(error){ 

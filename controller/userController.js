@@ -50,4 +50,17 @@ const loginUser = async (req, res) => {
     })
 }
 
-export{getUsers,getUser,insertUser,deleteUser,updateUser, loginUser}
+const addItem = async (req, res) => {
+    try {
+      const { itemID, quantity } = req.body;
+      const userID = req.user.id;
+      const cartItem = await Cart.create({ userID, itemID, quantity });
+      res.json(cartItem);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      res.status(500).json({ message: 'Error adding item to cart' });
+    }
+}
+
+
+export{getUsers,getUser,insertUser,deleteUser,updateUser, loginUser, addItem}
