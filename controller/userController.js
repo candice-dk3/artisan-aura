@@ -52,9 +52,9 @@ const loginUser = async (req, res) => {
 
 const addItem = async (req, res) => {
     try {
-      const { itemID, quantity } = req.body;
+      const { itemID, itemQuantity } = req.body;
       const userID = req.user.id;
-      const cartItem = await Cart.create({ userID, itemID, quantity });
+      const cartItem = await Cart.create({ userID, itemID, itemQuantity });
       res.json(cartItem);
     } catch (error) {
       console.error('Error adding item to cart:', error);
