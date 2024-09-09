@@ -112,6 +112,7 @@ export default {
 <style scoped>
     .signup-inner-sec{
         margin-top: 7.4rem;
+        color: black;
     }
     .register-login{
         display: grid;

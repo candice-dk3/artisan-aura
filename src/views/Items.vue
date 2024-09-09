@@ -1,23 +1,46 @@
 <template>
     <section class="items-sec">
-        <div>
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    <img :src="paint" class="d-block w-100" alt="">
+        <div class="spacer"></div>
+        <div class="BSI-carousel">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img :src="paint" class="d-block w-100" alt="carousel-image">
+                            <div class="carousel-caption">
+                                <p>Shop Paint!! </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img :src="brushes" class="d-block w-100" alt="carousel-image">
+                            <div class="carousel-caption">
+                                <p>Shop Paint Brushes!! </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img :src="canvas" class="d-block w-100" alt="carousel-image">
+                            <div class="carousel-caption">
+                                <p>Shop Canvas!! </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img :src="stationary" class="d-block w-100" alt="carousel-image">
+                            <div class="carousel-caption">
+                                <p>Shop Stationary!! </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                    <img :src="brushes" class="d-block w-100" alt="">
-                    </div>
-                    <div class="carousel-item">
-                    <img :src="canvas" class="d-block w-100" alt="">
-                    </div>
-                    <div class="carousel-item">
-                    <img :src="stationary" class="d-block w-100" alt="">
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
-        </div>
         <div>
             <div class="search-sort">
                 <div class="sort-by-bar">
@@ -55,7 +78,7 @@
                     </div>
                     <div class="button-container">
                         <button @click="addToCart(item)">Purchase</button>
-                        <button @click="$router.push(`/items/${item.itemID}`)">View More</button>
+                        <router-link :to="{name:'Item',params:{id:item.itemID}}">View More</router-link>
                     </div>
                     </template>
                 </Card>
@@ -75,15 +98,15 @@ export default {
     },
     data(){
         return{
-            paint: '',
-            brushes: '',
-            canvas: '',
-            stationary: '',
+            paint: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
+            brushes: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
+            canvas: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
+            stationary: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
             searchQuery: '',
             selectedCategory: '',
             selectedPriceOrder: '',
             selectedQuantity: '',
-            items: []
+            items: [],
         }
     },
     computed: {
@@ -91,7 +114,7 @@ export default {
         return this.$store.state.items.map(item => {
             return {
                 ...item,
-                quantity: 0 // add a quantity property to each item
+                quantity: 0
             }
         }).filter(item => {
             return item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
@@ -125,7 +148,34 @@ export default {
 </script>
 <style scoped>
 .items-sec{
-    margin-top: 6.9rem;
+    margin-top: 7.4rem;
+}
+.BSI-carousel {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.carousel-inner {
+    height: 20rem;
+}
+
+.carousel-item img {
+    height: 20rem;
+    object-fit: cover;
+    width: 100%;
+}
+.spacer {
+    height: 3rem;
+}
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 .search-sort {
 display: flex;
@@ -145,6 +195,17 @@ background-color: transparent;
 border: none;
 padding: 0.5rem;
 }
+#categoryFilter:focus, #priceFilter:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+#categoryFilter option, #priceFilter option {
+  background-color: #ffffff; 
+  border: none;
+  box-shadow: none;
+}
+
 
 .sort {
 color: black;
@@ -221,10 +282,28 @@ background-color: #f5e883;
     font-size: 0.9rem;
     color: black;
 }
-/* .carousel-control-prev, .carousel-control-next{
+.carousel-control-prev, .carousel-control-next {
   background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
-button[data-v-5ebb49ea]:hover {
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  box-shadow: none;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
   background-color: transparent;
-} */
+  border: none;
+  box-shadow: none;
+}
+
+.carousel-control-prev-icon {
+  filter: invert(100%);
+}
+
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
 </style>

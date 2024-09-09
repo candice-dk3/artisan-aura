@@ -1,7 +1,7 @@
 <template>
-    <div>
-        
-    </div>
+    <section class="about-inner-sec">
+
+    </section>
 </template>
 <script>
 export default {
@@ -9,5 +9,7 @@ export default {
 }
 </script>
 <style scoped>
-    
+    .about-inner-sec{
+        margin-top: 7.4rem;
+    }
 </style>
