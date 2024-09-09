@@ -19,11 +19,9 @@
               </div>
               <div class="f-nav">
                   <router-link to="/" class="nav-link" @click="closeNavbar">Home</router-link>
-                  <router-link to="/Items" class="nav-link" @click="closeNavbar">Products</router-link>
-              </div>
-              <div class="t-nav">              
-                <router-link to="/Cart" class="nav-link" @click="closeNavbar">Cart</router-link>
-                <router-link to="/SignUp" class="nav-link" @click="closeNavbar">Sign Up</router-link>
+                  <router-link to="/Items" class="nav-link" @click="closeNavbar">Products</router-link>             
+                  <router-link to="/SignUp" class="nav-link" @click="closeNavbar">Sign Up</router-link>
+                  <router-link to="/Cart" class="nav-link" @click="closeNavbar"><img :src="cartLogo" alt="CK" class="cartLogo"/></router-link>
                 <router-link to="/Account" class="nav-link" @click="closeNavbar"><img :src="acclogo" alt="CK" class="acclogo"/></router-link></div>
             </div>
           </div>
@@ -39,7 +37,8 @@ export default {
   data() {
     return {
       logo:'https://github.com/candice-dk3/artisanAura-images/blob/master/artisan%20aura%20lo%20cfab7f95-b73f-4e66-914c-b7397d070d9f%20(2).png?raw=true',
-      acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-user-90.png?raw=true'
+      acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-user-90.png?raw=true',
+      cartLogo:'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-fast-cart-96.png?raw=true'
     }
   },
   methods: {
@@ -79,7 +78,7 @@ export default {
 }
 .navbar-nav {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
 }
 .navbar-expand-sm .navbar-nav .nav-link {
@@ -91,39 +90,24 @@ export default {
   float: left;
   margin-top: -2rem;
 }
-.acclogo{
+.acclogo, .cartLogo{
   width: 2.4rem;
   padding: 0.2rem;
 }
 .f-nav{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   padding: 1rem;
 }
-.t-nav{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 1rem;
-}
+
 .navbar-nav .nav-link {
   padding-right: 1rem;
   padding-left: 1rem;
 }
-/* 
-nav a {
-  font-weight: bold;
-  font-size: 20px;
-  color: white;
-  text-decoration: none;
-  padding: 1.8rem;
-}
-nav a:hover {
-  color: #ffc400;
-} */
 @media screen and (max-width: 300px) {
       .offcanvas-body a {
-      font-size: 14px;
-      padding: 0rem;
+      font-size: 1.3rem;
+      padding: 1rem;
     }
       .navbar-nav {
       display: grid;
@@ -135,10 +119,6 @@ nav a:hover {
         display: none;
       }
       .f-nav{
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-    }
-    .t-nav{
       display: grid;
       grid-template-columns: repeat(1, 1fr);
     }

@@ -3,8 +3,8 @@
     <div v-if="user">
       <h1>Welcome, {{ user.userName }}!</h1>
       <p>Email: {{ user.emailAdd }}</p>
-      <!-- <p>Account Created: {{ formatDate(user.createdAt) }}</p> -->
-      <img :src="user.Profile" alt="Profile Picture">
+      <p>Account Created: {{ formatDate(user.createdAt) }}</p>
+      <img :src="user.profilePicture" alt="Profile Picture">
     </div>
     <div v-else>
       <p>Please log in to see your account details.</p>
@@ -14,9 +14,20 @@
 
 <script>
 export default {
-  async getUser({ $axios }) {
-    const response = await $axios.get(`${apiURL}users/${id}`);
-    return { user: response.data };
+  data() {
+    return {
+      user: null,
+      apiURL: 'https://artisan-aura.onrender.com/', // define apiURL
+      id: 1 // define id
+    }
+  },
+  async mounted() {
+    try {
+      const response = await this.$axios.get(`${this.apiURL}users/${userID}`);
+      this.user = response.data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   methods: {
     formatDate(date) {

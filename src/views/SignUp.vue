@@ -102,9 +102,9 @@ export default {
         //     }
         // }
         async loginUser() {
-      await this.$store.dispatch('loginUser', { emailAdd: this.emailAdd, userPass: this.userPass });
-      this.$router.push('/'); // Redirect to home page
-    }
+            await this.$store.dispatch('loginUser', { emailAdd: this.emailAdd, userPass: this.userPass });
+            this.$router.push('/');
+        }
     },
   
 }

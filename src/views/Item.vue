@@ -1,9 +1,7 @@
 <template>
   <section class="item">
   <div class="container-fluid ">
-    {{ $store.state.item }}
       <div v-if="item()">
-          <h2>{{ $store.state.item.itemName }}</h2>
             <div class="item-card">
               <div class="item-image">
                 <img :src="$store.state.item.itemURL" :alt="$store.state.item.itemName" class="item-img">
@@ -37,7 +35,6 @@ export default{
   methods: {
       getItem(){
           this.$store.dispatch('getItem',this.$route.params.id);
-          // console.log(this.$store.state.item.itemName);
       },
       item() {
           return this.$store.state.item;
@@ -56,6 +53,7 @@ export default{
 .item{
   margin-top: 7.4rem;
   color: black;
+  padding: 1rem;
 }
 .item-card{
   display: grid;

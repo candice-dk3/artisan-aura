@@ -7,25 +7,13 @@
                         <div class="carousel-item active">
                             <img :src="paint" class="d-block w-100" alt="carousel-image">
                             <div class="carousel-caption">
-                                <p>Shop Paint!! </p>
+                                <p>Shop Now!!</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img :src="brushes" class="d-block w-100" alt="carousel-image">
                             <div class="carousel-caption">
-                                <p>Shop Paint Brushes!! </p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img :src="canvas" class="d-block w-100" alt="carousel-image">
-                            <div class="carousel-caption">
-                                <p>Shop Canvas!! </p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img :src="stationary" class="d-block w-100" alt="carousel-image">
-                            <div class="carousel-caption">
-                                <p>Shop Stationary!! </p>
+                                <p>Shop Now!!</p>
                             </div>
                         </div>
                     </div>
@@ -98,10 +86,8 @@ export default {
     },
     data(){
         return{
-            paint: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
-            brushes: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
-            canvas: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
-            stationary: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-1.png?raw=true',
+            paint: 'https://github.com/candice-dk3/artisanAura-images/blob/master/art-1.jpg?raw=true',
+            brushes: 'https://github.com/candice-dk3/artisanAura-images/blob/master/art-2.jpg?raw=true',
             searchQuery: '',
             selectedCategory: '',
             selectedPriceOrder: '',
@@ -135,7 +121,7 @@ export default {
         this.$store.dispatch('getItems')
     },
     addToCart(item) {
-        this.$store.dispatch('addToCart', { item, quantity: item.quantity })
+        this.$store.dispatch('addToCart', { item, itemQuantity: item.itemQuantity })
     },
         // purchaseAlert(prodName) {
         //     alert(`You have purchased ${prodName}`);
@@ -288,7 +274,7 @@ background-color: #f5e883;
   box-shadow: none;
 }
 .carousel-control-prev:hover, .carousel-control-next:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
   border: none;
   box-shadow: none;
 }

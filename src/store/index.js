@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
-import router from './index.js';
+import router from '../router/index.js';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import {useCookies} from 'vue-cookies'
@@ -33,12 +33,12 @@ export default createStore({
     setUser(state, payload) {
       state.user = payload;
     },
-    addToCart(state, { item, quantity }) {
+    addToCart(state, { item, itemQuantity }) {
       const cartItem = state.cart.find(cartItem => cartItem.itemID === item.itemID)
       if (cartItem) {
-          cartItem.quantity += quantity
+          cartItem.itemQuantity += itemQuantity
       } else {
-          state.cart.push({ item, quantity })
+          state.cart.push({ item, itemQuantity })
       }
   }
   },
@@ -55,7 +55,7 @@ export default createStore({
       try {
         const { data } = await axios.get(`${apiURL}items/${id}`);
         console.log(data);
-        commit('setItem', data);
+        commit('setItem', data[0]);
       } catch (error) {
         console.error('Error fetching item:', error);
       }

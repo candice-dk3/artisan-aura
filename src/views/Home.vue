@@ -96,7 +96,7 @@
 export default {
     data() {
         return {
-            image: 'https://github.com/candice-dk3/artisanAura-images/blob/master/person-painting-1.jpg?raw=true',
+            image: 'https://github.com/candice-dk3/artisanAura-images/blob/master/6214509-uhd_3840_2160_25fps-ezgif.com-optimize.gif?raw=true',
             categoryPaint: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paint.jpeg?raw=true',
             categoryPBrushes: 'https://github.com/candice-dk3/artisanAura-images/blob/master/paintbrush-picture-2.png?raw=true',
             categoryCanvas: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/master/canvas.webp',
@@ -129,6 +129,7 @@ export default {
 .home-sec {
     height: auto;
     margin-top: 7.4rem;
+    color: black;
 }
 
 /* Welcome Sect */
@@ -169,7 +170,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://github.com/candice-dk3/artisanAura-images/blob/master/person-painting-1.jpg?raw=true');
+
     background-size: cover;
     filter: blur(3px);
     z-index: -1;

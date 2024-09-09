@@ -41,7 +41,7 @@
 export default {
   data(){
         return{
-            emailSec: '',
+            emailSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-email-90.png?raw=true',
             instaSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-instagram-logo-144.png?raw=true',
             facebookSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-facebook-logo-144.png?raw=true',
             twitterSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-twitter-144.png?raw=true'
@@ -51,22 +51,30 @@ export default {
 </script>
 
 <style scoped>
-.inner-contact-sec{
+.inner-contact-sec {
   margin-top: 7.4rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  background-image: url('https://github.com/candice-dk3/artisanAura-images/blob/master/3515758-hd_1920_1080_25fps-ezgif.com-optimize.gif?raw=true');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  padding: 2rem;
 }
 .form-sec {
     margin: 0 auto;
     max-width: 40rem;
     padding: 4rem;
-    background-color: #ff9f9f;
+    background-color: transparent;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border-radius: 2rem;
 }
 .form-sec label {
     display: block;
     margin-bottom: 1rem;
+    border-radius: 2rem;
   
 }
 .form-sec input, .form-sec textarea {
@@ -75,11 +83,13 @@ export default {
     height: 2rem;
     margin-bottom: 1rem;
     border: none;
+    border-radius: 2rem;
 }
 .form-sec input:focus, .form-sec textarea:focus {
     outline: none;
     border: none;
     box-shadow: none;
+    border-radius: 2rem;
   }
 .button-div {
   display: grid;
@@ -92,7 +102,7 @@ export default {
 .form-sec textarea {
     height: 10rem; 
     resize: vertical;
-   
+    border-radius: 2rem;
 }
 .btn{
   background-color: #b19595;
