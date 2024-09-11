@@ -11,7 +11,6 @@ const checkUser = async (req, res, next) => {
     // console.log(hashedPassword)
     let result = await compare(userPass, hashedPassword);
     // console.log(result);
-    
     try {
         if (result == true) {
             let token = jwt.sign({ emailAdd: emailAdd }, process.env.SECRET_KEY, { expiresIn: '1hr' });
@@ -26,7 +25,7 @@ const checkUser = async (req, res, next) => {
                 }
             });
             req.body.token = token;
-            console.log(token)
+            // console.log(token)
             next();
             return;
         } else {
