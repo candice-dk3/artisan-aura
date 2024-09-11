@@ -18,9 +18,9 @@ app.use('/items', itemRouter)
 app.use('/users', userRouter)
 app.post('/cart/add', async (req, res) => {
     try {
-      const { itemID, quantity } = req.body;
+      const { itemID, itemQuantity } = req.body;
       const userID = req.user.ID;
-      const cartItem = await Cart.create({ userID, itemID, quantity });
+      const cartItem = await Cart.create({ userID, itemID, itemQuantity });
       res.json(cartItem);
     } catch (error) {
       console.error('Error adding item to cart:', error);
