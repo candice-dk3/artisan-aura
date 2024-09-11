@@ -13,7 +13,7 @@ const queryDb = async (query, params) => {
 const getUsersDb = async () => queryDb('SELECT * FROM users');
 
 const getUserDb = async (emailAdd) => {
-  const [[data]] = await queryDb('SELECT * FROM users WHERE emailAdd = ?', [emailAdd]);
+  const [data] = await queryDb('SELECT * FROM users WHERE emailAdd = ?', [emailAdd])
   return data || null;
 };
 

@@ -1,4 +1,5 @@
 import { pool} from '../config/config.js'
+
 const fetchCarts = async (req, res) => {
   try {
     const strQry = `
