@@ -22,21 +22,21 @@ const getUserIdDb = async (id) => {
   return data || null;
 };
 
-const insertUserDb = async (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) => {
+const insertUserDb = async (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, userProfilePicture) => {
   const hashedPassword = await bcrypt.hash(userPass, 10);
   await queryDb(
-    `INSERT INTO users(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) VALUES (?,?,?,?,?,?,?,?)`,
-    [firstName, lastName, userAge, Gender, userRole, emailAdd, hashedPassword, userProfile]
+    `INSERT INTO users(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, userProfilePicture) VALUES (?,?,?,?,?,?,?,?,?)`,
+    [firstName, lastName, userAge, Gender, userRole, emailAdd, hashedPassword, userProfile, userProfilePicture]
   );
 };
 
 const deleteUserDb = async (userID) => queryDb('DELETE FROM users WHERE userID = ?', [userID]);
 
-const updateUserDb = async (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id) => {
+const updateUserDb = async (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, userProfilePicture, id) => {
   const hashedPassword = await bcrypt.hash(userPass, 10);
   await queryDb(
-    `UPDATE users SET firstName = ?, lastName = ?, userAge = ?, Gender = ?, userRole = ?, emailAdd = ?, userPass = ?, userProfile = ? WHERE userID = ?`,
-    [firstName, lastName, userAge, Gender, userRole, emailAdd, hashedPassword, userProfile, id]
+    `UPDATE users SET firstName = ?, lastName = ?, userAge = ?, Gender = ?, userRole = ?, emailAdd = ?, userPass = ?, userProfile = ?, userProfilePicture = ?, WHERE userID = ?`,
+    [firstName, lastName, userAge, Gender, userRole, emailAdd, hashedPassword, userProfile, userProfilePicture, id]
   );
 };
 
