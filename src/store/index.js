@@ -16,8 +16,18 @@ export default createStore({
     cart: [],
     item: null,
     user: null,
+    // user: {
+    //   userID: null,
+    //   userName: '',
+    //   userAge: '',
+    //   Gender: '',
+    //   emailAdd: '',
+    //   profilePicture: ''
+    // }
   },
   getters:{
+    user: (state) => state.user,
+    loggedInUser: state => state.user,
     cart: state => state.cart
   },
   mutations: {
@@ -33,6 +43,9 @@ export default createStore({
     setUser(state, payload) {
       state.user = payload;
     },
+    clearUser(state) {
+      state.user = null;
+    },
     addToCart(state, { item, itemQuantity }) {
       const cartItem = state.cart.find(cartItem => cartItem.itemID === item.itemID)
       if (cartItem) {
@@ -40,7 +53,7 @@ export default createStore({
       } else {
           state.cart.push({ item, itemQuantity })
       }
-  }
+    }
   },
   actions: {
     async getItems({ commit }) {
@@ -125,7 +138,7 @@ export default createStore({
     },
     async getUser({ commit },id) {
       try {
-        const { data } = await axios.get(`${apiURL}users/${id}`)
+        const { data } = await axios.get(`${apiURL}users/singleuser/${id}`)
         console.log(data);
         commit('setUser', data)
       } catch (error) {
@@ -136,7 +149,6 @@ export default createStore({
       try {
         const { data } = await (await axios.post(`${apiURL}users/register`, user)).data
         console.log('newdata'+data.message)
-
         if (data.message){
           toast("User Added Successfully", {
             theme: "dark",
@@ -144,7 +156,6 @@ export default createStore({
             position: "top-center",
             dangerouslyHTMLString: true
           })
-          
         }
       } catch (error) {
         console.log(error)
@@ -167,6 +178,7 @@ export default createStore({
     async updateUser({ commit }, user) {
       try {
         const { data } = await axios.patch(`${apiURL}users/update/${user.userID}`, user)
+        $cookies.set('token', data.token);
         if (data.message) {
           toast("User Updated Successfully", {
             theme: "dark",
@@ -182,6 +194,7 @@ export default createStore({
     async loginUser({ commit }, info) {
       console.log(info);
       let { data } = await axios.post(`${apiURL}users/login`, info);
+      commit('clearUser'); 
       console.log(data);
       $cookies.set('token', data.token);
       if (data.message) {
@@ -192,7 +205,22 @@ export default createStore({
           "dangerouslyHTMLString": true
         });
       }
-      // Remove the router.push and location.reload() from here
+    },
+    async logoutUser({ commit }) {
+      try {
+        await axios.post(`${apiURL}users/logout`);
+        $cookies.remove('token');
+        commit('setUser', null);
+        toast("Logged Out Successfully", {
+          theme: "dark",
+          type: "default",
+          position: "top-center",
+          dangerouslyHTMLString: true
+        });
+        router.push('/'); // redirect to login page
+      } catch (error) {
+        console.error('Error logging out:', error);
+      }
     }
   },
   modules: {},

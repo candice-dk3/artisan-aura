@@ -8,7 +8,6 @@
               </div>
               <div class="item-detail">
                     <h1 class="item-name">{{$store.state.item.itemName}}</h1>
-                    <h5 class="item-desc">{{$store.state.item.itemDesc}}</h5>
                     <h4 class="item-cate">Category: {{$store.state.item.itemCategory}}</h4>
                     <br>
                     <br>
@@ -22,7 +21,11 @@
                   </div>
               </div>
             </div>
-            <button @click="$router.push(`/items`)">Continue Shopping</button>
+            <div class="desc-sec">
+              <h3>Description</h3>
+              <h5 class="item-desc">{{$store.state.item.itemDesc}}</h5>
+            </div>
+            <button @click="$router.push(`/items`)" class="continue-shopping">Continue Shopping</button>
         </div>
    
   </div>
@@ -57,7 +60,7 @@ export default{
 }
 .item-card{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 6rem;
 }
 .item-detail{
@@ -70,8 +73,8 @@ export default{
 }
 .item-desc{
   text-align: left;
-  margin-top:2rem;
-  margin-bottom:2rem
+  margin-top:3rem;
+  margin-bottom:2rem;
 }
 .item-cate{
   margin-top: 2rem;
@@ -87,6 +90,75 @@ export default{
 .item-img{
   width:30rem;
   height:auto
+}
+.desc-sec{
+  width: 80rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  margin: 0 auto;
+  display: flex; 
+  justify-content: center;
+}
+.desc-sec h3, .desc-sec .item-desc {
+  text-align: left;
+  margin-left: 0;
+}
+.purchase {
+  text-align: right;
+}
+
+.purchase button.btn {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative; /* Add this */
+}
+
+.purchase button.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border: 2px solid #4CAF50;
+  transition: width 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.purchase button.btn:hover::before {
+  width: 100%;
+}
+
+.continue-shopping {
+  position: relative;
+  background-color: #4CAF50; 
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.continue-shopping:hover {
+  background-color: #3e8e41;
+}
+.continue-shopping::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border: 2px solid #4CAF50;
+  transition: width 0.3s ease;
+  border-radius: 0.5rem; 
+}
+.continue-shopping:hover::before {
+  width: 100%;
 }
 
 @media screen and (max-width: 300px) {

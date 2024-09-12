@@ -28,23 +28,27 @@
         </div>
     </footer>
 </template>
+
+
 <script>
 export default {
     name: 'Footer',
     data(){
         return{
-            footerlogo: 'https://github.com/candice-dk3/artisanAura-images/blob/master/artisan%20aura%20lo%20cfab7f95-b73f-4e66-914c-b7397d070d9f%20(2).png?raw=true',
-            twitterlogo: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-twitter-144.png?raw=true',
-            instagramlogo: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-instagram-logo-144.png?raw=true',
-            facebooklogo: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-facebook-logo-144.png?raw=true',
-            mastercard: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-mastercard-144.png?raw=true',
-            visa: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-visa-logo-144.png?raw=true',
-            paypal: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-paypal-logo-144.png?raw=true',
-            arrowRight: 'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-right-arrow-26%20(1).png?raw=true'
+            footerlogo: 'https://github.com/candice-dk3/artisanAura-images/blob/main/AALogo.png?raw=true',
+            twitterlogo: 'https://github.com/candice-dk3/artisanAura-images/blob/main/twitter.png?raw=true',
+            instagramlogo: 'https://github.com/candice-dk3/artisanAura-images/blob/main/instagram.png?raw=true',
+            facebooklogo: 'https://github.com/candice-dk3/artisanAura-images/blob/main/facebook.png?raw=true',
+            mastercard: 'https://github.com/candice-dk3/artisanAura-images/blob/main/mastercard.png?raw=true',
+            visa: 'https://github.com/candice-dk3/artisanAura-images/blob/main/visa.png?raw=true',
+            paypal: 'https://github.com/candice-dk3/artisanAura-images/blob/main/paypal.png?raw=true',
+            arrowRight: 'https://github.com/candice-dk3/artisanAura-images/blob/main/arrow-right.png?raw=true'
         }
     }
 }
 </script>
+
+
 <style scoped>
 footer{
     background-color: #B692C2;
@@ -81,6 +85,7 @@ a{
     margin-top: 3rem;
 }
 
+
 .social-logo, .payment-logo{
     width: 3.8rem;
     padding: 0.6rem;
@@ -93,5 +98,52 @@ a{
 .ap-h4{
     font-size: 1rem;
     padding: 0;
+}
+
+
+@media screen and (max-width: 300px) {
+.h4-footer{
+    color: white;
+    padding: 2rem;
+    font-size: 0.78rem;
+}
+.inner-footer{
+    grid-template-columns: repeat(1, 1fr);
+}
+.contact-us {
+    grid-template-rows: repeat(1, 1fr);
+    padding: 2rem;
+    justify-content: center;
+}
+.payment{
+    grid-template-rows: repeat(1, 1fr);
+}
+.contact-us a {
+    margin-top: 1rem;
+    width: 8rem;
+}
+.fl{
+    width: 10rem;
+    margin-top: 0rem;
+}
+.social-logo{
+    width: 3.6rem;
+    padding: 0.6rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.payment-logo{
+    width: 4.2rem;
+    padding: 0.6rem;
+    margin-top: 5rem;
+}
+.ap-h4{
+    font-size: 0.9rem;
+    margin-bottom: -4rem;
+}
+.arRight{
+    width: 1rem;
+}
+ 
 }
 </style>

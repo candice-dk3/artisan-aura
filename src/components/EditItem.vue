@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="'#adminEditItem'+item.itemID">Edit Item</button>
+        <button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="'#adminEditItem'+item.itemID"><img :src="edit" alt=""></button>
         <div class="modal fade" :id="'adminEditItem'+item.itemID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editItemLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -45,6 +45,7 @@ export default {
                 itemPrice: this.item.itemPrice,
                 itemQuantity: this.item.itemQuantity
             },
+            edit: 'https://github.com/candice-dk3/artisanAura-images/blob/main/edit.png?raw=true'
         }
     },
     methods:{

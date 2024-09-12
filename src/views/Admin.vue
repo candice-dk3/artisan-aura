@@ -1,5 +1,11 @@
 <template>
     <section class="inner-admin">
+        <div class="welcome">
+                <img :src="image" alt="Background-image" class="bg-image">
+                <div class="text-overlay">
+                    <h2 class="h2-text">Admin</h2>
+                </div>
+            </div>
         <button  type="button" class="btn" data-bs-toggle="modal"
             data-bs-target="#adminAddItem">Add New Item</button>
             <div class="admin-page-table">
@@ -27,7 +33,7 @@
                         <td>{{ item.itemQuantity }}</td>
                         <td>
                             <edit-item :item="item"/>
-                            <button @click="deleteItem(item)" class="btn btn-outline-danger">Delete Product</button>
+                            <button @click="deleteItem(item)" class="btn btn-outline-danger"><img :src="deleteLogo" alt=""></button>
                         </td>
                         </tr>
                     </tbody>
@@ -38,7 +44,7 @@
                 <table class="table table-responsive table-bordered">
                     <thead class="table-group-divider">
                         <tr>
-                        <th>ID</th>
+                        <th>Profile Picture</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Role</th>
@@ -50,7 +56,7 @@
                     </thead>
                     <tbody class="table-group-divider" id="table-products">
                         <tr v-for="user in $store.state.users" :key="user.userID">
-                        <td>{{ user.userID }}</td>
+                        <td><img :src="user.userProfilePicture " alt="User Image" class="img-fluid" width="50rem" height="50rem"/></td>
                         <td>{{ user.firstName }} {{ user.lastName }}</td> 
                         <td>{{ user.Gender }}</td> 
                         <td>{{ user.userRole }}</td>
@@ -58,12 +64,11 @@
                         <td>{{ user.emailAdd }}</td> 
                         <td>{{ user.userPass }}</td> 
                             <edit-user :user="user"/>
-                            <button @click="deleteUser(user)" class="btn btn-outline-danger">Delete User</button>
+                            <button @click="deleteUser(user)" class="btn btn-outline-danger"><img :src="deleteLogo" alt=""></button>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         <!-- Add New Item Modal -->
         <div class="modal fade" id="adminAddItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="addItemLabel" aria-hidden="true">
@@ -94,8 +99,7 @@
             </div>
         </div>
         <!-- Add New User Modal -->
-        <div class="modal fade" id="adminAddUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal fade" id="adminAddUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -111,6 +115,7 @@
                                 <input class="form-control m-2" type="text" placeholder="Enter Gender" v-model="newUser.Gender" required>
                                 <input class="form-control m-2" type="text" placeholder="Enter Role" v-model="newUser.userRole" required>
                                 <input class="form-control m-2" type="text" placeholder="Enter Profile" v-model="newUser.userProfile" required>
+                                <input class="form-control m-2" type="text" placeholder="Enter Profile Picture" v-model="newUser.userProfilePicture" required>
                                 <input class="form-control m-2" type="text" placeholder="Enter Email" v-model="newUser.emailAdd" required>
                                 <input class="form-control m-2" type="text" placeholder="Enter Password" v-model="newUser.userPass" required>
                             </div>
@@ -150,8 +155,11 @@ export default {
                 userRole: '',
                 emailAdd: '',
                 userProfile: '',
-                userPass: ''
-            }
+                userPass: '',
+                userProfilePicture: ''
+            },
+            image: 'https://github.com/candice-dk3/artisanAura-images/blob/main/admin-cover.gif?raw=true',
+            deleteLogo: 'https://github.com/candice-dk3/artisanAura-images/blob/main/delete.png?raw=true'
         };
     },
     components:{
@@ -204,25 +212,59 @@ export default {
 <style scoped>
 .inner-admin {
     margin-top: 6.9rem;
+    color: black;
 }
-
+.bg-image {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+}
+.welcome {
+    background-size: cover;
+}
+.h2-text {
+    color: white;
+    font-size: 4rem;
+    padding: 1rem;
+}
+.h1-text {
+    color: white;
+    font-size: 6rem;
+}
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+}
+.text-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    filter: blur(3px);
+    z-index: -1;
+}
 .table-responsive {
     width: 100%;
     background-color: transparent;
 }
-
 .table {
     width: 80rem;
     margin-top: 1rem;
     background-color: transparent;
 }
-
 .table th,
 .table td {
     text-align: left;
     justify-content: center;
     align-content: center;
-    background-color: transparent;
+    background-color: rgba(151, 151, 151, 0.451);
     border: none;
 }
 

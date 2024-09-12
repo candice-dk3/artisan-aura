@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="'#adminEditUser'+user.userID">Edit User</button>
+        <button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="'#adminEditUser'+user.userID"><img :src="edit" alt=""></button>
         <div class="modal fade" :id="'adminEditUser'+user.userID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -20,6 +20,7 @@
                                 <input class="form-control m-2" type="text" placeholder="Enter Password" v-model="updateUser.userPass" required>
                                 <input class="form-control m-2" type="text" placeholder="Enter Role" v-model="updateUser.userRole" required>
                                 <input class="form-control m-2" type="text" placeholder="Enter Email" v-model="updateUser.emailAdd" required>
+                                <input class="form-control m-2" type="text" placeholder="Enter Profile Picture" v-model="updateUser.userProfilePicture" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-outline-success" data-bs-dismiss="modal">Clear</button>
@@ -48,7 +49,9 @@ export default {
                 userPass: this.user.userPass,
                 userRole: this.user.userRole,
                 emailAdd: this.user.emailAdd,
-            }
+                userProfilePicture: this.user.userProfilePicture
+            },
+             edit: 'https://github.com/candice-dk3/artisanAura-images/blob/main/edit.png?raw=true'
         }
     },
     methods:{

@@ -19,7 +19,7 @@
               </div>
               <div class="f-nav">
                   <router-link to="/" class="nav-link" @click="closeNavbar">Home</router-link>
-                  <router-link to="/Items" class="nav-link" @click="closeNavbar">Products</router-link>             
+                  <router-link to="/Items" class="nav-link" @click="closeNavbar">Shop</router-link>             
                   <router-link to="/SignUp" class="nav-link" @click="closeNavbar">Sign Up</router-link>
                   <router-link to="/Cart" class="nav-link" @click="closeNavbar"><img :src="cartLogo" alt="CK" class="cartLogo"/></router-link>
                 <router-link to="/Account" class="nav-link" @click="closeNavbar"><img :src="acclogo" alt="CK" class="acclogo"/></router-link></div>
@@ -36,9 +36,9 @@ export default {
   name: 'NavBarComp',
   data() {
     return {
-      logo:'https://github.com/candice-dk3/artisanAura-images/blob/master/artisan%20aura%20lo%20cfab7f95-b73f-4e66-914c-b7397d070d9f%20(2).png?raw=true',
-      acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-user-90.png?raw=true',
-      cartLogo:'https://github.com/candice-dk3/artisanAura-images/blob/master/icons8-fast-cart-96.png?raw=true'
+      logo:'https://github.com/candice-dk3/artisanAura-images/blob/main/AALogo.png?raw=true',
+      acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/user.png?raw=true',
+      cartLogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/cart.png?raw=true'
     }
   },
   methods: {
@@ -54,7 +54,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 20px;
-  background-color: #B692C2;
+  /* background-color: #b692c262; */
+  backdrop-filter: blur(10px);
 }
 
 .offcanvas-body a {
@@ -73,13 +74,16 @@ export default {
   /* transition-duration: 2sec; */
 }
 .navbar{
-  background-color: #B692C2;
+  background-color: #b692c262;
   width: 100%;
+  backdrop-filter: blur(10px);
 }
 .navbar-nav {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
+  backdrop-filter: blur(10px);
+  /* background-color: #b692c262; */
 }
 .navbar-expand-sm .navbar-nav .nav-link {
   padding-right: 20px;
@@ -97,9 +101,9 @@ export default {
 .f-nav{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  backdrop-filter: blur(10px);
   padding: 1rem;
 }
-
 .navbar-nav .nav-link {
   padding-right: 1rem;
   padding-left: 1rem;
