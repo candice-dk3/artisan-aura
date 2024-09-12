@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <td>GET</td>
-                    <td>/users/:id</td>
+                    <td>/users/singleuser/:id</td>
                     <td>Gets single user by userID</td>
                 </tr>
                 <tr>
@@ -97,6 +97,53 @@
                     <td>DELETE</td>
                     <td>/items/delete/:id</td>
                     <td>Delete item by itemID</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Cart</h2>
+        <table border="1px solid">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Path</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>/carts</td>
+                    <td>Get all users carts</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/:id/cart</td>
+                    <td>Gets single users cart by its ID</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/cart/add</td>
+                    <td>Adding an Item to the cart</td>
+                </tr>
+                <tr>
+                    <td>PATCH/PUT</td>
+                    <td>/:id/cart/:itemID</td>
+                    <td>Updating a users cart</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/:id/cart</td>
+                    <td>Delete item in the cart</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/:id/cart</td>
+                    <td>Add user cart</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/:id/cart/:itemID</td>
+                    <td>Delete item in the cart</td>
                 </tr>
             </tbody>
         </table>

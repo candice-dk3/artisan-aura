@@ -49,7 +49,15 @@ const loginUser = async (req, res) => {
         token: req.body.token
     })
 }
-
+const logoutUser = async (req, res) => {
+    try {
+      req.token = null;
+      res.json({ message: 'You logged out successfully' });
+    } catch (error) {
+      console.error('Error logging out:', error);
+      res.status(500).json({ message: 'Error logging out' });
+    }
+} 
 const addItem = async (req, res) => {
     try {
       const { itemID, itemQuantity } = req.body;
@@ -61,14 +69,6 @@ const addItem = async (req, res) => {
       res.status(500).json({ message: 'Error adding item to cart' });
     }
 }
-const logoutUser = async (req, res) => {
-    try {
-      req.token = null;
-      res.json({ message: 'You logged out successfully' });
-    } catch (error) {
-      console.error('Error logging out:', error);
-      res.status(500).json({ message: 'Error logging out' });
-    }
-  }
+
 
 export{getUsers,getUser,insertUser,deleteUser,updateUser, loginUser, logoutUser, addItem}
