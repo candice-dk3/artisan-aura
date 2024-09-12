@@ -1,5 +1,5 @@
 import express from 'express'
-import{getUsers,insertUser,getUser,updateUser,deleteUser, loginUser, addItem} from '../controller/userController.js'
+import{getUsers,insertUser,getUser,updateUser,deleteUser, loginUser, logoutUser, addItem} from '../controller/userController.js'
 import { fetchCarts, fetchuserCart, fetchadduserCart, fetchupdateUserCart, deleteItem, deleteCart } from '../model/cartDb.js'
 import { checkUser, verifyAToken } from '../middleware/authenticate.js'
 
@@ -17,6 +17,8 @@ userRouter.patch('/update/:id',updateUser)
 userRouter.delete('/delete/:id',deleteUser)
 
 userRouter.post('/login',checkUser, loginUser)
+
+userRouter.post('/logout', logoutUser) 
 
 // Cart Routes
 userRouter.get('/carts', fetchCarts)
