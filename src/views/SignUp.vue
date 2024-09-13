@@ -1,7 +1,7 @@
 <template>
     <section class="signup-inner-sec">
       <div class="register-login">
-        <button @click="signUp = !signUp">SignUp / Login</button>
+        <button @click="signUp = !signUp" class="login-button">SignUp / Login</button>
         <!-- Sign Up Section -->
         <div v-if="signUp" class="signUp-sec">
           <div class="form">
@@ -16,7 +16,7 @@
               <input placeholder="" type="text" class="input" id="lastname" v-model="lastName">
               <label class="iLabel" for="lastname">Last name</label>
             </div>
-            <div class="input-container ic2">
+            <div class="input-container ic1">
               <input placeholder="" type="text" class="input" id="age" v-model="userAge">
               <label class="iLabel" for="age">Age</label>
             </div>
@@ -25,16 +25,16 @@
               <label class="iLabel" for="gender">Gender</label>
             </div>
             <div class="input-container ic2">
+                <input placeholder="" type="password" class="input" id="password" v-model="userPass">
+                <label class="iLabel" for="password">Password</label>
+            </div>
+            <div class="input-container ic1">
+                <input placeholder="" type="email" class="input" id="email" v-model="emailAdd">
+                <label class="iLabel" for="email">Email</label>
+            </div>
+            <div class="input-container ic1">
               <input placeholder="" type="text" class="input" id="profile-picture" v-model="userProfilePicture">
               <label class="iLabel" for="profile-picture">Profile Picture</label>
-            </div>
-            <div class="input-container ic2">
-              <input placeholder="" type="password" class="input" id="password" v-model="userPass">
-              <label class="iLabel" for="password">Password</label>
-            </div>
-            <div class="input-container ic2">
-              <input placeholder="" type="email" class="input" id="email" v-model="emailAdd">
-              <label class="iLabel" for="email">Email</label>
             </div>
             <div class="input-container ic2">
               <input placeholder="" type="text" class="input" id="user-role" v-model="userRole">
@@ -109,7 +109,6 @@
   };
   </script>
 
-
 <style scoped>
 .signup-inner-sec{
     margin-top: 7.4rem;
@@ -120,8 +119,8 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 2rem;
-  display: flex; /* Add this to center the section horizontally */
-  justify-content: center; /* Add this to center the section horizontally */
+  /* display: flex; Add this to center the section horizontally */
+  /* justify-content: center; Add this to center the section horizontally */
 }
 
 /* Log in Styling */
@@ -209,20 +208,27 @@
 
 /* Sign Up Styling */
 .signUp-sec {
-  margin: 0 auto; /* Add this to center the section horizontally */
-  max-width: 500px; /* Set a maximum width for the section */
-  padding: 20px; /* Add some padding to the section */
-  background-color: #f3cfff; /* Add a background color to the section */
-  border-radius: 40px; /* Add a border radius to the section */
-  box-shadow: #B692C2 0px 30px 30px -20px; /* Add a box shadow to the section */
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #f3cfff;
+  border-radius: 40px;
+  box-shadow: #B692C2 0px 30px 30px -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 80vh;
+  margin-bottom: 40rem; /* Add this */
+  padding-bottom: 20rem; /* Add this */
+  flex-direction: column;
 }
-.form {
+.form , .signUp-sec{
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
   height: 500px;
+  width: 100%;
   padding: 20px;
-  width: 320px;
 }
 .title {
   color: #eee;
@@ -238,16 +244,24 @@
   font-weight: 600;
   margin-top: 10px;
 }
-.input-container {
+.input-container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.input-container, .signUp-sec {
   height: 50px;
   position: relative;
-  width: 100%;
+  width: 48%;
+  margin-bottom: 20px;
+  display: inline-block;
+  vertical-align: top;
 }
 .ic1 {
   margin-top: 40px;
 }
 .ic2 {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 .input {
   background-color: #303245;
@@ -260,20 +274,6 @@
   outline: 0;
   padding: 4px 20px 0;
   width: 100%;
-}
-.cut {
-  background-color: #15172b;
-  border-radius: 10px;
-  height: 20px;
-  left: 20px;
-  position: absolute;
-  top: -20px;
-  transform: translateY(0);
-  transition: transform 200ms;
-  width: 76px;
-}
-.cut-short {
-  width: 50px;
 }
 .iLabel {
   color: #65657b;
@@ -298,7 +298,7 @@
 .input:focus ~ .iLabel {
   color: #dc2f55;
 }
-.submit {
+.submit, .signUp-sec {
   background-color: #08d;
   border-radius: 12px;
   border: 0;
@@ -307,7 +307,7 @@
   cursor: pointer;
   font-size: 18px;
   height: 50px;
-  margin-top: 38px;
+  margin-top: 20px; 
   text-align: center;
   width: 100%;
 }
@@ -315,6 +315,27 @@
   background-color: #06b;
 }
 
+.login-button {
+  background-color: #2196F3;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px; 
+  margin: 20px auto;
+  text-align: center; 
+  width: 50%;
+}
+
+.login-button:hover {
+  background-color: #1976D2; 
+}
+
+.login-button:active {
+  background-color: #1976D2;
+  transform: translateY(2px);
+}
 
 @media screen and (max-width: 300px) {
 .container {

@@ -35,7 +35,7 @@
                     <div class="category-container">
                         <img :src="categoryStationary" alt="" class="category-image">
                         <a href="/Items" class="category-text">
-                            <h5 class="h5-text">EExplore More</h5>
+                            <h5 class="h5-text">Explore More</h5>
                         </a>
                     </div>
                 </div>
@@ -66,25 +66,27 @@
                 </div>
             </div>
             <div class="spacer"></div>
-            <div class="BSI">
-                <div class="bText">
-                    <h4 class="h4-bText">Browse some of our best selling items</h4>
-            <div class="spacer"></div>
-                </div>
-                <div class="bsItems">
-                    <div v-for="(item, index) in bestSellingItems" :key="index" class="bsItem">
-                        <div class="img-div">
-                            <img :src="item.itemURL" alt="" class="bsItemImage">
-                        </div>
-                        <div class="name-div">
-                            <h5>{{ item.itemName }}</h5>
-                            <div class="price-view">
-                                <p>Price: R {{ item.itemPrice }}</p>
-                                <button @click="$router.push('/Items')">View All</button>
+            <div class="BSI fade-down">
+                <div class="BSI">
+                    <div class="bText">
+                        <h4 class="h4-bText">Browse some of our best selling items</h4>
+                <div class="spacer"></div>
+                    </div>
+                    <div class="bsItems">
+                        <div v-for="(item, index) in bestSellingItems" :key="index" class="bsItem">
+                            <div class="img-div">
+                                <img :src="item.itemURL" alt="" class="bsItemImage">
+                            </div>
+                            <div class="name-div">
+                                <h5>{{ item.itemName }}</h5>
+                                <div class="price-view">
+                                    <p>Price: R {{ item.itemPrice }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="spacer"></div>
         </div>
@@ -293,6 +295,7 @@ export default {
     align-items: center;
     padding: 2rem;
     gap: 20%;
+    justify-content: center;
 }
 .price-view p, .price-view button {
     margin: 0;
@@ -306,20 +309,6 @@ export default {
 }
 .price-view button:hover {
     background-color: #B692C2;
-}
-button {
-  background-color: #B692C2;;
-  color: #ffd700;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-}
-
-button:hover {
-  background-color: #ffd700;
-  /* color: #B692C2; */
 }
 
 @media screen and (max-width: 300px) {
@@ -379,6 +368,19 @@ button:hover {
     height: 3rem;
 }
 }
+.fade-down {
+  animation: fadeDown 1s ease-in-out;
+}
 
+@keyframes fadeDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
 
 </style>

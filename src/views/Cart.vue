@@ -1,22 +1,24 @@
 <template>
   <section class="cart-sec">
     <div v-if="loading">Loading...</div>
-    <div v-if="error">{{ error }}</div>
     <div v-if="!loading && cart.length > 0">
       <div v-for="item in cart" :key="item.itemID" class="cart-item">
         <img :src="item.itemURL" :alt="item.itemName" width="100" height="auto">
         <div>
           <h4>{{ item.itemName }}</h4>
           <p>Price: R{{ item.itemPrice }}</p>
-          <p>Quantity: {{ item.itemQuantity }}</p>
           <div class="quantity-container">
-            <button @click="decreaseQuantity(item.itemQuantity )">-</button>
-            <span>{{ item.itemQuantity }}</span>
-            <button @click="increaseQuantity(item.itemQuantity )">+</button>
+            <button @click="decreaseQuantity(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button @click="increaseQuantity(item)">+</button>
           </div>
           <button @click="removeFromCart(item.itemID)">Remove</button>
         </div>
+        <!-- Total Price for each item -->
+        <p>Total Price: R{{ item.itemPrice * item.quantity }}</p>
       </div>
+      <!-- Total Price of the entire cart -->
+      <p>Total Cart Price: R{{ totalPrice }}</p>
     </div>
     <div v-else>
       <p>Your cart is empty.</p>
@@ -26,40 +28,46 @@
 
 <script>
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useCart } from '../composables/cart';
 
 export default {
   setup() {
-    const { cart, newItemQuantity } = useCart();
+    const { cart, newItemQuantity, removeFromCart: removeItem } = useCart();
     const loading = ref(false);
     const error = ref('');
 
+    // Increase item quantity
     const increaseQuantity = (item) => {
       if (typeof newItemQuantity === 'function') {
-        newItemQuantity(item.itemID, item.itemQuantity  + 1);
+        newItemQuantity(item.itemID, item.quantity + 1); // Update API and cart
+        item.quantity += 1; // Update locally after API
       } else {
         console.error('newItemQuantity is not a function');
       }
     };
 
+    // Decrease item quantity
     const decreaseQuantity = (item) => {
-      if (typeof newItemQuantity === 'function') {
-        newItemQuantity(item.itemID, item.itemQuantity  - 1);
+      if (item.quantity > 1 && typeof newItemQuantity === 'function') {
+        newItemQuantity(item.itemID, item.quantity - 1); // Update API and cart
+        item.quantity -= 1; // Update locally after API
       } else {
-        console.error('newItemQuantity is not a function');
+        console.error('newItemQuantity is not a function or invalid quantity');
       }
     };
 
+    // Remove item from cart
     const removeFromCart = async (itemID) => {
       try {
-        await axios.delete(`https://artisan-aura.onrender.com/users/carts/${itemID}`);
-        // Refresh cart or remove item locally
+        await removeItem(itemID); // Send delete request to API
+        cart.value = cart.value.filter(item => item.itemID !== itemID); // Update locally
       } catch (error) {
         console.error('Error removing item from cart:', error);
       }
     };
 
+    // Fetch cart items on mount
     onMounted(async () => {
       loading.value = true;
       try {
@@ -72,10 +80,25 @@ export default {
       }
     });
 
-    return { cart, increaseQuantity, decreaseQuantity, removeFromCart, loading, error };
-  }
-}
+    // Total price of the entire cart
+    const totalPrice = computed(() => {
+      return cart.value.reduce((acc, item) => acc + item.itemPrice * item.quantity, 0);
+    });
+
+    return { cart, increaseQuantity, decreaseQuantity, removeFromCart, loading, error, totalPrice };
+  },
+};
 </script>
+
+<style scoped>
+  .quantity-container {
+    display: flex;
+    align-items: center;
+  }
+  .quantity-container button {
+    margin: 0 5px;
+  }
+</style>
 
 <style scoped>
 .cart-sec {

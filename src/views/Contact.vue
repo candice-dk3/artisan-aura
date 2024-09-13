@@ -225,13 +225,13 @@ form{
             <div class="container">  
                 <h5>Mon-Fri: 8am - 5pm</h5>
                 <h5>Saturday: 8am - 4pm</h5>
-                <h5>Sunday: 8am - 4pm</h5>
+                <h5>Sunday: 9am - 3pm</h5>
             </div>
           </div>
         </div>
         <div class="contact-form">
+          <form action="https://formspree.io/f/xgvwdpqe" method="POST">
             <div class="card">
-              <p class="heading">Form</p>
             <div class="input-div">
                 <input type="text" class="input" placeholder="First Name">
                 <input type="text" class="input" placeholder="Last Name">
@@ -241,39 +241,36 @@ form{
                 <input class="input" type="text" placeholder="Phone">
             </div>
             <div class="input-div">
-              <input class="input" type="text" placeholder="Message">
+              <!-- <input class="input" type="text" placeholder="Message"> -->
+              <input name="message" rows="3" class="input" type="text" placeholder="Message"/>
             </div>
             <div class="button-div">
               <button class="submit">Submit</button>
             </div>
             </div>
+          </form>
         </div>
       </div>
     <div class="socials">
       <h4>Find us on</h4>
-      <div class="social-links">
-        <div class="image">
-          <img :src="twitter" alt="">
-          <h5>Twitter link</h5>
-        </div>
-        <div class="image">
-          <img :src="twitter" alt="">
-          <h5>Twitter link</h5>
-        </div>
-        <div class="image">
-          <img :src="twitter" alt="">
-          <h5>Twitter link</h5>
-        </div>
-        <div class="image">
-          <img :src="twitter" alt="">
-          <h5>Twitter link</h5>
-        </div>
-        <div class="image">
-          <img :src="twitter" alt="">
-          <h5>Twitter link</h5>
+        <div class="social-links">
+          <div class="image">
+            <img :src="twitter" alt=""><h5>artisan_AuraSA</h5>
+          </div>
+          <div class="image">
+            <img :src="instagram" alt=""><h5>Artisan_Aura</h5>
+          </div>
+          <div class="image">
+            <img :src="facebook" alt=""><h5>Artisan Aura Offical</h5>
+          </div>
+          <div class="image">
+            <img :src="phone" alt=""><h5>081 314 0839</h5>
+          </div>
+          <div class="image">
+            <img :src="email" alt=""><h5>artisanAura@gmail.com</h5>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </section>
 </template>
@@ -282,6 +279,10 @@ export default {
   data(){
     return{
       twitter: 'https://github.com/candice-dk3/artisanAura-images/blob/main/twitter.png?raw=true',
+      instagram: 'https://github.com/candice-dk3/artisanAura-images/blob/main/instagram.png?raw=true',
+      facebook: 'https://github.com/candice-dk3/artisanAura-images/blob/main/facebook.png?raw=true',
+      phone: 'https://github.com/candice-dk3/artisanAura-images/blob/main/phone.png?raw=true',
+      email:'https://github.com/candice-dk3/artisanAura-images/blob/main/email.png?raw=true'
     }
   }
 }
@@ -295,7 +296,7 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: auto;
   padding: 2rem;
   color: black;
 }
@@ -303,21 +304,52 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-
-
-/* Form styling */
-.card {
-  height: auto;
-  background: lightgrey;
-  background-color: #4158D0;
-  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-  border-top-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
+.socials {
+  position: relative;
+  backdrop-filter: blur(5px);
   padding: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  gap: 1rem;
+}
+
+.socials::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  filter: blur(5px);
+  z-index: -1;
+}
+.social-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.image {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.image img {
+  width: 2rem;
+}
+.image h5 {
+  font-weight: 700;
+  padding: 0.56rem;
+  margin-right: 0rem;
+}
+.card {
+  height: 24rem;
+  background: lightgrey;
+  background-color: transparent;
+  padding: 1rem;
+  box-shadow: rgba(60, 60, 60, 0.3) 0px 19px 38px, rgba(26, 26, 26, 0.22) 0px 15px 12px;
   transition: 0.5s ease-in-out;
-  max-width: 360px;
-  width: 24rem; 
+  max-width: 390px;
+  width: 80rem; 
 }
 .heading {
   text-align: center;
@@ -342,12 +374,10 @@ export default {
   text-align: center;
 }
 .submit {
-  margin-top: 3rem;
+  margin-top: 8rem;
   text-align: center;
   padding: 8px 3rem;
   border: none;
-  border-top-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
   background-color: black;
   color: white;
   transition: 0.5s ease-in-out;
@@ -374,7 +404,7 @@ export default {
   transition: 0.5s ease-in-out;
 }
 .input-div input {
-  width: 10rem; /* adjust the width to fit your needs */
+  width: 20rem;
   margin: 0 1rem;
 }
 /* Socials */

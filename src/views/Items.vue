@@ -60,7 +60,7 @@
             <p>Price: R{{ item.itemPrice }}</p>
             <div class="quantity-container">
               <label for="quantity">Quantity:</label>
-              <input type="number" id="quantity" v-model="item.itemQuantity" min="1" :max="item.itemQuantity" value="1">
+              <input type="number" id="quantity" v-model="item.quantity" min="1" :max="item.itemQuantity" value="1">
             </div>
             <div class="button-container">
               <button @click="addToCart(item)">Purchase</button>
@@ -87,7 +87,7 @@ import { useCart } from '../composables/cart';
 
 export default {
   components: {
-    Card
+    Card,
   },
   data() {
     return {
@@ -103,29 +103,30 @@ export default {
   },
   computed: {
     filteredItems() {
-      return this.items.map(item => ({
-        ...item,
-        quantity: 0
-      }))
-      .filter(item => item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-        (this.selectedCategory === '' || item.itemCategory === this.selectedCategory))
-      .sort((a, b) => {
-        if (this.selectedPriceOrder === 'asc') {
-          return a.itemPrice - b.itemPrice;
-        } else if (this.selectedPriceOrder === 'desc') {
-          return b.itemPrice - a.itemPrice;
-        } else {
-          return 0;
-        }
-      });
-    }
+      return this.items
+        .map(item => ({
+          ...item,
+          quantity: 1, // Default item quantity to 1 for adding to cart
+        }))
+        .filter(item => item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
+          (this.selectedCategory === '' || item.itemCategory === this.selectedCategory))
+        .sort((a, b) => {
+          if (this.selectedPriceOrder === 'asc') {
+            return a.itemPrice - b.itemPrice;
+          } else if (this.selectedPriceOrder === 'desc') {
+            return b.itemPrice - a.itemPrice;
+          } else {
+            return 0;
+          }
+        });
+    },
   },
   setup() {
     const { addToCart } = useCart();
     return { addToCart };
   },
   methods: {
-    async fetchProducts() {
+    async getItems() {
       this.loading = true;
       try {
         const response = await axios.get('https://artisan-aura.onrender.com/items');
@@ -135,19 +136,33 @@ export default {
       } finally {
         this.loading = false;
       }
-    }
+    },
+    addToCart(item) {
+      if (item.quantity > item.itemQuantity) {
+        alert(`Only ${item.itemQuantity} items available in stock.`);
+      } else {
+        this.addToCart({ ...item, quantity: item.quantity });
+      }
+    },
   },
   created() {
-    this.fetchProducts();
-  }
-}
+    this.getItems();
+  },
+};
 </script>
 
 <style scoped>
 .items-sec {
   margin-top: 7.4rem;
 }
-
+.quantity-container {
+  display: flex;
+  align-items: center;
+}
+.quantity-container input {
+  margin-left: 5px;
+  width: 50px;
+}
 .BSI-carousel {
   max-width: 80%;
   margin: 0 auto;
