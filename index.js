@@ -8,7 +8,7 @@ let port = process.env.PORT || 1003
 const app = express()
 app.use(express.json())
 
-const allowedOrigins = ['http://localhost:8080', '' ];
+const allowedOrigins = ['http://localhost:8080', ' https://artisan-aura.web.app' ];
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
