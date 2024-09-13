@@ -1,12 +1,5 @@
 <template>
   <div>
-    <!-- Spinner for loading state -->
-    <div v-if="loading">
-      <Spinner />
-    </div>
-
-    <!-- Display user info when available -->
-    <div v-else>
       <div class="row my-2">
         <div class="row center">
           <div class="card mt-5">
@@ -38,7 +31,6 @@
       </div>
     </div>
     <EditUser :user="user" :isVisible="showModal" @update="fetchUserInfoFromCookies" @close="showModal = false"/>
-  </div>
 </template>
 
 <script>
@@ -54,60 +46,56 @@ export default {
   },
   data() {
     return {
-      loading: true,  // Loading state for spinner
-      userInfo: null, // Local user data from cookies or API
-      showModal: false // Controls the visibility of the EditUser modal
+      loading: true,
+      userInfo: null, 
+      showModal: false
     };
   },
   computed: {
-    // Get user data from Vuex store or fallback to local userInfo
     user() {
       return this.$store.state.user || this.userInfo;
     }
   },
   methods: {
-    // Fetch user info from cookies
     fetchUserInfoFromCookies() {
       const storedUserInfo = cookies.get('userInfo');
       if (storedUserInfo && storedUserInfo.user) {
-        this.userInfo = storedUserInfo.user; // Set local user data
-        this.$store.commit('setSingleUser', storedUserInfo.user); // Update Vuex state
+        this.userInfo = storedUserInfo.user;
+        this.$store.commit('setUser', storedUserInfo.user);
       } else {
-        this.getUser(); // Fallback to API if no cookie data is available
+        this.getUser(); 
       }
     },
-    // Fetch user data from the server using Vuex action
     getUser() {
       const storedUserInfo = cookies.get('userInfo');
       if (storedUserInfo && storedUserInfo.user.userID) {
         this.$store.dispatch('getUser', storedUserInfo.user.userID)
           .then(() => {
-            this.loading = false; // Stop loading once user is fetched
+            this.loading = false;
           })
           .catch(e => {
             console.error('Error fetching user:', e);
-            this.loading = false; // Handle error and stop loading
+            this.loading = false;
           });
       } else {
         console.warn('No user found in cookies');
         this.loading = false;
       }
     },
-    // Logout user and clear cookies/Vuex state
     logoutUser() {
-      cookies.remove('userInfo'); // Clear cookies
-      this.$store.dispatch("logout"); // Dispatch Vuex logout action
+      cookies.remove('userInfo');
+      this.$store.dispatch("logout");
       Swal.fire({
         title: "Logged Out!",
         text: "You have been logged out. Please refresh the page.",
         icon: "success",
         showConfirmButton: true,
       });
-      this.$router.push('/login'); // Redirect to login page
+      this.$router.push('/login');
     }
   },
   mounted() {
-    this.fetchUserInfoFromCookies(); // Try fetching user data from cookies on mount
+    this.fetchUserInfoFromCookies();
   }
 };
 </script>

@@ -9,7 +9,7 @@
         <button  type="button" class="btn" data-bs-toggle="modal"
             data-bs-target="#adminAddItem">Add New Item</button>
             <div class="admin-page-table">
-                <table class="table table-responsive table-bordered">
+                <table class="table table-responsive">
                     <thead class="table-group-divider">
                         <tr>
                         <th>ID</th>
@@ -41,7 +41,7 @@
             </div>
             <button  type="button" class="btn" data-bs-toggle="modal" data-bs-target="#adminAddUser">Add New User</button>
             <div class="user-page-table">
-                <table class="table table-responsive table-bordered">
+                <table class="table table-responsive">
                     <thead class="table-group-divider">
                         <tr>
                         <th>Profile Picture</th>
@@ -264,7 +264,7 @@ export default {
     text-align: left;
     justify-content: center;
     align-content: center;
-    background-color: rgba(151, 151, 151, 0.451);
+    background-color: rgba(200, 200, 200, 0.166);
     border: none;
 }
 
