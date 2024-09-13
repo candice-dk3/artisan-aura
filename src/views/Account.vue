@@ -3,7 +3,8 @@
       <div class="row my-2">
         <div class="row center">
           <div class="card mt-5">
-            <div class="img">
+            {{ user }}
+            <!-- <div class="img">
               <img :src="user.userProfilePicture" class="card-img-top" />
             </div>
             <div class="card-body">
@@ -15,7 +16,7 @@
               <div>
                 <p class="card-text">{{ user.userRole }}</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -34,19 +35,16 @@
 </template>
 
 <script>
-import Spinner from "@/components/Spinner.vue";
 import EditUser from '@/components/EditUser.vue';
 import { useCookies } from 'vue3-cookies';
 const { cookies } = useCookies();
 
 export default {
   components: {
-    Spinner,
     EditUser
   },
   data() {
     return {
-      loading: true,
       userInfo: null, 
       showModal: false
     };
