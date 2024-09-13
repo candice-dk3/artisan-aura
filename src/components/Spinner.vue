@@ -19,7 +19,6 @@ export default {
 }
 </script>
 <style scoped>
-  /* From Uiverse.io by 00Kubi */ 
 .loader-container {
   position: relative;
   height: 100vh;

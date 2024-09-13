@@ -1,66 +1,29 @@
 <template>
     <section class="signup-inner-sec">
-      <div class="register-login">
-        <button @click="signUp = !signUp" class="login-button">SignUp / Login</button>
-        <!-- Sign Up Section -->
-        <div v-if="signUp" class="signUp-sec">
-          <div class="form">
-            <div class="title">Welcome</div>
-            <div class="subtitle">Let's create your account!</div>
-  
-            <div class="input-container ic1">
-              <input placeholder="" type="text" class="input" id="firstname" v-model="firstName">
-              <label class="iLabel" for="firstname">First name</label>
-            </div>
-            <div class="input-container ic2">
-              <input placeholder="" type="text" class="input" id="lastname" v-model="lastName">
-              <label class="iLabel" for="lastname">Last name</label>
-            </div>
-            <div class="input-container ic1">
-              <input placeholder="" type="text" class="input" id="age" v-model="userAge">
-              <label class="iLabel" for="age">Age</label>
-            </div>
-            <div class="input-container ic2">
-              <input placeholder="" type="text" class="input" id="gender" v-model="gender">
-              <label class="iLabel" for="gender">Gender</label>
-            </div>
-            <div class="input-container ic2">
-                <input placeholder="" type="password" class="input" id="password" v-model="userPass">
-                <label class="iLabel" for="password">Password</label>
-            </div>
-            <div class="input-container ic1">
-                <input placeholder="" type="email" class="input" id="email" v-model="emailAdd">
-                <label class="iLabel" for="email">Email</label>
-            </div>
-            <div class="input-container ic1">
-              <input placeholder="" type="text" class="input" id="profile-picture" v-model="userProfilePicture">
-              <label class="iLabel" for="profile-picture">Profile Picture</label>
-            </div>
-            <div class="input-container ic2">
-              <input placeholder="" type="text" class="input" id="user-role" v-model="userRole">
-              <label class="iLabel" for="user-role">Role</label>
-            </div>
-            <button @click="insertUser()" class="submit" type="text">Register</button>
-          </div>
-        </div>
-        <!-- Log In Section -->
-        <div v-else class="login-sec">
+        <div class="signUp-sec">
           <div class="container">
-            <div class="heading">Welcome Back</div>
-            <form action="" class="form1" @submit.prevent="loginUser()">
+            <div class="heading">Don't have an account? Sign Up now</div>
+            <form action="" class="form" @submit.prevent="insertUser()">
+              <input required class="input" type="text" name="firstName" id="firstName" placeholder="First Name" v-model="firstName"/>
+              <input required class="input" type="text" name="lastName" id="lastName" placeholder="Last Name" v-model="lastName"/>
+              <input required class="input" type="gender" name="gender" id="gender" placeholder="Gender" v-model="gender"/>
+              <input required class="input" type="age" name="Age" id="Age" placeholder="Age" v-model="Age"/>
+              <input required class="input" type="text" name="Profile" id="Profile" placeholder="Profile" v-model="userProfile"/>
+              <input required class="input" type="text" name="Role" id="Role" placeholder="Role" v-model="userRole"/>
+              <input required class="input" type="text" name="ProfilePicture" id="ProfilePicture" placeholder="Profile Picture" v-model="userProfilePicture"/>
               <input required class="input" type="email" name="email" id="email" placeholder="E-mail" v-model="emailAdd"/>
               <input required class="input" type="password" name="password" id="password" placeholder="Password" v-model="userPass"/>
-              <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
+              
+              <input class="login-button" type="reset" value="Clear" />
               <input class="login-button" type="submit" value="Sign In" />
             </form>
             <span class="agreement"><a href="#">Learn user licence agreement</a></span>
           </div>
         </div>
-      </div>
     </section>
   </template>
   
-  <script>
+<script>
   export default {
     data() {
       return {
@@ -73,7 +36,6 @@
         userProfile: '',
         userRole: '',
         userProfilePicture: '',
-        signUp: true
       };
     },
     methods: {
@@ -89,25 +51,10 @@
           userRole: this.userRole,
           userProfilePicture: this.userProfilePicture
         });
-      },
-      async loginUser() {
-        if (!this.emailAdd || !this.userPass) {
-          console.log('Please fill in all fields');
-          return;
-        }
-        try {
-          await this.$store.dispatch('loginUser', {
-            emailAdd: this.emailAdd,
-            userPass: this.userPass
-          });
-          this.$router.push('/');
-        } catch (error) {
-          console.error('Login failed:', error);
-        }
       }
     }
   };
-  </script>
+</script>
 
 <style scoped>
 .signup-inner-sec{
@@ -115,18 +62,11 @@
     color: black;
     margin-bottom: 2rem;
 }
-.register-login {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+.signUp-sec{
   padding: 2rem;
-  /* display: flex; Add this to center the section horizontally */
-  /* justify-content: center; Add this to center the section horizontally */
 }
-
-/* Log in Styling */
-
 .container {
-  max-width: 500px;
+  max-width: 100%;
   margin: 40px auto;
   padding: 30px; 
   background: #f3cfff;
@@ -134,6 +74,8 @@
   border-radius: 40px;
   border: 5px solid #f5dffc;
   box-shadow:  #B692C2 0px 30px 30px -20px;
+  width: fit-content;
+  box-sizing: border-box; 
 }
 .heading {
   text-align: center;
@@ -143,13 +85,19 @@
 }
 .form {
   margin-top: 30px;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }
 .form .input {
-  width: 100%;
+  width: 15rem;
+  margin: 15px 5px;
+  float: left;
+  grid-column: auto;
   background: white;
   border: none;
-  margin-top: 15px;
-  padding: 15px 20px;
+  padding: 20px 30px; 
   border-radius: 20px;
   box-shadow: #B692C2 0px 10px 10px -5px;
   border-inline: 2px solid transparent;
@@ -174,18 +122,20 @@
   color: #ffc400;
   text-decoration: none;
 }
-.form .login-button {
+.login-button {
+  justify-self: center; /* add this property to center the button horizontally */
   display: block;
-  width: 100%;
+  width: 20rem; /* keep the fixed width */
+  margin: 20px auto; /* add auto margin to center the button */
   font-weight: bold;
   background: linear-gradient(45deg, #B692C2 0%, #B692C2 100%);
   color: white;
   padding-block: 15px;
-  margin: 20px auto;
   border-radius: 20px;
   box-shadow: #feedb5 0px 20px 10px -15px;
   border: none;
   transition: all 0.2s ease-in-out;
+  text-align: center; /* add this property to center the button text */
 }
 .form .login-button:hover {
   transform: scale(1.03);
@@ -205,138 +155,6 @@
   color: #ffc400;
   font-size: 9px;
 }
-
-/* Sign Up Styling */
-.signUp-sec {
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 20px;
-  background-color: #f3cfff;
-  border-radius: 40px;
-  box-shadow: #B692C2 0px 30px 30px -20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: 80vh;
-  margin-bottom: 40rem; /* Add this */
-  padding-bottom: 20rem; /* Add this */
-  flex-direction: column;
-}
-.form , .signUp-sec{
-  background-color: #15172b;
-  border-radius: 20px;
-  box-sizing: border-box;
-  height: 500px;
-  width: 100%;
-  padding: 20px;
-}
-.title {
-  color: #eee;
-  font-family: sans-serif;
-  font-size: 36px;
-  font-weight: 600;
-  margin-top: 30px;
-}
-.subtitle {
-  color: #eee;
-  font-family: sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 10px;
-}
-.input-container-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.input-container, .signUp-sec {
-  height: 50px;
-  position: relative;
-  width: 48%;
-  margin-bottom: 20px;
-  display: inline-block;
-  vertical-align: top;
-}
-.ic1 {
-  margin-top: 40px;
-}
-.ic2 {
-  margin-top: 40px;
-}
-.input {
-  background-color: #303245;
-  border-radius: 12px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
-  font-size: 18px;
-  height: 100%;
-  outline: 0;
-  padding: 4px 20px 0;
-  width: 100%;
-}
-.iLabel {
-  color: #65657b;
-  font-family: sans-serif;
-  left: 20px;
-  line-height: 14px;
-  pointer-events: none;
-  position: absolute;
-  transform-origin: 0 50%;
-  transition: transform 200ms, color 200ms;
-  top: 20px;
-}
-.input:focus ~ .cut {
-  transform: translateY(8px);
-}
-.input:focus ~ .iLabel {
-  transform: translateY(-30px) translateX(10px) scale(0.75);
-}
-.input:not(:focus) ~ .iLabel {
-  color: #808097;
-}
-.input:focus ~ .iLabel {
-  color: #dc2f55;
-}
-.submit, .signUp-sec {
-  background-color: #08d;
-  border-radius: 12px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
-  cursor: pointer;
-  font-size: 18px;
-  height: 50px;
-  margin-top: 20px; 
-  text-align: center;
-  width: 100%;
-}
-.submit:active {
-  background-color: #06b;
-}
-
-.login-button {
-  background-color: #2196F3;
-  border: none;
-  border-radius: 20px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
-  height: 50px; 
-  margin: 20px auto;
-  text-align: center; 
-  width: 50%;
-}
-
-.login-button:hover {
-  background-color: #1976D2; 
-}
-
-.login-button:active {
-  background-color: #1976D2;
-  transform: translateY(2px);
-}
-
 @media screen and (max-width: 300px) {
 .container {
   max-width: 15rem;

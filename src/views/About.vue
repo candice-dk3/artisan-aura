@@ -9,7 +9,9 @@
         <div class="our-Story">
             <div class="history">
                 <div class="text-box">
-                    <p>Established in 2022</p>
+                    <p>Artisan Aura is an up-and-coming art supply store, with a mission to provide high-quality art materials tailored to artists of all levels. Established in 2024, Artisan Aura is focused on offering a unique blend of traditional and innovative art supplies, carefully curated to meet the needs of creators across different artistic disciplines.
+                        What makes Artisan Aura unique as an art supply store is its dedication to artistry and its commitment to creating a seamless shopping experience for artists. The store prioritizes modern design aesthetics, reflected both in its product selections and in its user-friendly e-commerce platform, designed for an intuitive and immersive shopping experience. They specialize in art supplies ranging from paints, brushes, and canvases to niche tools and materials, ensuring both beginner and professional artists have access to the tools they need for self-expression.
+                    </p>
                 </div>
                 <div class="image-box">
                     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -42,21 +44,21 @@
                     <div class="card-team" style="width: 16rem;">
                         <img :src="teamMember1" class="card-img-top" alt="">
                         <div class="card-body">
-                            <p class="team-text">Position: Head Manager</p>
+                            <p class="team-text">Position: Store Manager</p><br>
                             <p class="team-text">Name: Melisa Harris</p>
                         </div>
                     </div>
                     <div class="card" style="width: 16rem;">
                         <img :src="teamMember2" class="card-img-top" alt="">
                         <div class="card-body">
-                            <p class="team-text">Position:</p>
+                            <p class="team-text">Position: Sales Associate</p><br>
                             <p class="team-text">Name: Emily Harris</p>
                         </div>
                     </div>
                     <div class="card" style="width: 16rem;">
                         <img :src="teamMember3" class="card-img-top" alt="">
                         <div class="card-body">
-                            <p class="team-text">Position:</p>
+                            <p class="team-text">Position: Inventory Specialist</p><br>
                             <p class="team-text">Name: Arjun Colins</p>
                         </div>
                     </div>
@@ -193,6 +195,11 @@ export default {
 .carousel-item img {
     height: 24rem;
     object-fit: cover;
+    padding: 1rem;
+}
+.text-box p{
+    font-size: 1.1rem;
+    text-align: left;
     padding: 1rem;
 }
 

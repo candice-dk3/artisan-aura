@@ -20,9 +20,10 @@
               <div class="f-nav">
                   <router-link to="/" class="nav-link" @click="closeNavbar">Home</router-link>
                   <router-link to="/Items" class="nav-link" @click="closeNavbar">Shop</router-link>             
-                  <router-link to="/SignUp" class="nav-link" @click="closeNavbar">Sign Up</router-link>
                   <router-link to="/Cart" class="nav-link" @click="closeNavbar"><img :src="cartLogo" alt="CK" class="cartLogo"/></router-link>
-                <router-link to="/Account" class="nav-link" @click="closeNavbar"><img :src="acclogo" alt="CK" class="acclogo"/></router-link></div>
+                  <router-link to="/SignUp" class="nav-link" @click="closeNavbar"><img :src="signUp" alt="CK" class="signUp"/></router-link>
+                  <router-link to="/LogIn" class="nav-link" @click="closeNavbar"><img :src="logIn" alt="CK" class="logIn"/></router-link>
+                  <router-link to="/Account" class="nav-link" @click="closeNavbar"><img :src="acclogo" alt="CK" class="acclogo"/></router-link></div>
             </div>
           </div>
         </div>
@@ -38,7 +39,9 @@ export default {
     return {
       logo:'https://github.com/candice-dk3/artisanAura-images/blob/main/AALogo.png?raw=true',
       acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/user.png?raw=true',
-      cartLogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/cart.png?raw=true'
+      cartLogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/cart1.png?raw=true',
+      signUp: 'https://github.com/candice-dk3/artisanAura-images/blob/main/signUp.png?raw=true',
+      logIn: 'https://github.com/candice-dk3/artisanAura-images/blob/main/LogIn.png?raw=true'
     }
   },
   methods: {
@@ -54,7 +57,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 20px;
-  /* background-color: #b692c262; */
+  background-color: #b692c262;
   backdrop-filter: blur(10px);
 }
 
@@ -83,7 +86,7 @@ export default {
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
   backdrop-filter: blur(10px);
-  /* background-color: #b692c262; */
+  background-color: #b692c262;
 }
 .navbar-expand-sm .navbar-nav .nav-link {
   padding-right: 20px;
@@ -94,13 +97,13 @@ export default {
   float: left;
   margin-top: -2rem;
 }
-.acclogo, .cartLogo{
+.acclogo, .cartLogo, .logIn, .signUp{
   width: 2.4rem;
   padding: 0.2rem;
 }
 .f-nav{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   backdrop-filter: blur(10px);
   padding: 1rem;
 }

@@ -219,33 +219,39 @@ form{
       <div class="detail-Form-sec">
         <div class="details">
           <div class="address-sec">
-            Adrress: 
+            <a href="https://www.google.com/maps/@-33.9204474,18.4237693,3a,75y,266.95h,120.42t/data=!3m7!1e1!3m5!1s4h1wxINMjKYuhD6gztV-FQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3D4h1wxINMjKYuhD6gztV-FQ%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D304.9881%26pitch%3D0%26thumbfov%3D100!7i13312!8i6656?entry=ttu&g_ep=EgoyMDI0MDkxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+            <h5 class="address">
+              3 St Georges Mall
+              <br> Cape Town, Western Cape
+            </h5>
+          </a>
           </div>
+          <div class="spacer"></div>
           <div class="open-dates-sec">
             <div class="container">  
-                <h5>Mon-Fri: 8am - 5pm</h5>
-                <h5>Saturday: 8am - 4pm</h5>
-                <h5>Sunday: 9am - 3pm</h5>
+                <h5 class="opening-date">Mon-Fri: 8am - 5pm</h5>
+                <h5 class="opening-date">Saturday: 8am - 4pm</h5>
+                <h5 class="opening-date">Sunday: 9am - 3pm</h5>
             </div>
           </div>
         </div>
         <div class="contact-form">
-          <form action="https://formspree.io/f/xgvwdpqe" method="POST">
+          <form action="https://formspree.io/f/xgvwdpqe" method="POST" target="_blank">
             <div class="card">
             <div class="input-div">
-                <input type="text" class="input" placeholder="First Name">
-                <input type="text" class="input" placeholder="Last Name">
+                <input name="name" type="name" class="input" placeholder="First Name">
+                <input name="name" type="name" class="input" placeholder="Last Name">
             </div>
             <div class="input-div">
-                <input type="text" class="input" placeholder="Email">
-                <input class="input" type="text" placeholder="Phone">
+                <input name="email" type="email" class="input" placeholder="Email">
+                <input name="number" type="number" class="input" placeholder="Phone">
             </div>
             <div class="input-div">
-              <!-- <input class="input" type="text" placeholder="Message"> -->
               <input name="message" rows="3" class="input" type="text" placeholder="Message"/>
             </div>
             <div class="button-div">
-              <button class="submit">Submit</button>
+              <button class="submit" type="reset">Clear</button>
+              <button class="submit" type="submit">Submit</button>
             </div>
             </div>
           </form>
@@ -255,20 +261,28 @@ form{
       <h4>Find us on</h4>
         <div class="social-links">
           <div class="image">
-            <img :src="twitter" alt=""><h5>artisan_AuraSA</h5>
+            <a href="https://x.com/home?lang=en" target="_blank">
+              <img :src="twitter" alt=""><h5 class="social-text">artisan_AuraSA</h5>
+            </a>
           </div>
-          <div class="image">
-            <img :src="instagram" alt=""><h5>Artisan_Aura</h5>
-          </div>
-          <div class="image">
-            <img :src="facebook" alt=""><h5>Artisan Aura Offical</h5>
-          </div>
-          <div class="image">
-            <img :src="phone" alt=""><h5>081 314 0839</h5>
-          </div>
-          <div class="image">
-            <img :src="email" alt=""><h5>artisanAura@gmail.com</h5>
-          </div>
+          <a href="https://x.com/home?lang=en" target="_blank">
+            <div class="image">
+              <img :src="instagram" alt=""><h5 class="social-text">Artisan_Aura</h5>
+            </div>
+          </a>
+          <a href="https://www.facebook.com/" target="_blank">
+            <div class="image">
+              <img :src="facebook" alt=""><h5 class="social-text">Artisan Aura Offical</h5>
+            </div>
+          </a>
+            <div class="image">
+              <img :src="phone" alt=""><h5 class="social-text">081 314 0839</h5>
+            </div>
+          <a href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=new" target="_blank">
+            <div class="image">
+              <img :src="email" alt=""><h5 class="social-text">artisanAura@gmail.com</h5>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -300,6 +314,9 @@ export default {
   padding: 2rem;
   color: black;
 }
+.spacer{
+  margin-top: 5rem;
+}
 .detail-Form-sec{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -325,16 +342,18 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 1rem;
-  justify-content: space-between;
+  gap: 0.1rem;
+  width: auto;
+  padding: 0rem;
 }
 .image {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
 }
 .image img {
-  width: 2rem;
+  width: 3rem;
 }
 .image h5 {
   font-weight: 700;
@@ -348,8 +367,7 @@ export default {
   padding: 1rem;
   box-shadow: rgba(60, 60, 60, 0.3) 0px 19px 38px, rgba(26, 26, 26, 0.22) 0px 15px 12px;
   transition: 0.5s ease-in-out;
-  max-width: 390px;
-  width: 80rem; 
+  max-width: 50rem;
 }
 .heading {
   text-align: center;
@@ -370,8 +388,15 @@ export default {
   padding: 8px;
   outline: none;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
 .button-div {
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
 }
 .submit {
   margin-top: 8rem;
@@ -409,8 +434,20 @@ export default {
 }
 /* Socials */
 .social-links{
-  display: flex;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  flex-direction: column;
   gap: 1rem;
+  width: 88rem;
+}
+.address, .opening-date{
+  text-align: left;
+}
+.social-text{
+  text-align: center;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
