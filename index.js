@@ -7,10 +7,18 @@ let port = process.env.PORT || 1003
 
 const app = express()
 app.use(express.json())
+
+const allowedOrigins = ['http://localhost:8080', '' ];
 app.use(cors({
-    origin: ['http://localhost:8080', 'https://artisan-aura.onrender.com/'],
-    credentials:true
-}))
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 
 app.use(express.static('public'))
 
