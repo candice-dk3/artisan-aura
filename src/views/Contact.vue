@@ -1,221 +1,7 @@
-<!-- <template>
-  <section class="inner-contact-sec">
-    <div class="scocial-sec">
-      <h3 class="find-h3">Find us on</h3>
-        <div class="contact-us-inner-sec">
-                <div class="social-links">
-                  <div class="social-images">
-                    <a href="/"><div class="email-image"><img :src="emailSec" alt="CK" class="email-sec"/></div></a>
-                      <div class="insta-image"><img :src="instaSec" alt="CK" class="insta-sec"/></div>
-                      <div class="facebook-image"> <img :src="facebookSec" alt="CK" class="facebook-sec"/></div>
-                      <div class="twitter-image"><img :src="twitterSec" alt="CK" class="twitter-sec"/></div>
-                  </div>
-              <div class="social-text">
-                  <div class="email-text">artisanAura@gmail.com</div>
-                  <div class="insta-text">Artisan_Aura</div>
-                  <div class="facebook-text">Artisan Aura Offical</div>
-                  <div class="twitter-text">artisan_AuraSA</div>
-              </div>
-          </div>
-        </div>
-    </div>
-    <div class="contact-sec">
-    <h1>contact us</h1>
-    <div class="form-sec">
-        <form action="https://formspree.io/f/xgvwdpqe" method="POST">
-        <label>Your Name: <input type="name" name="name"></label>
-        <label>Your Number: <input type="number" name="number"></label>
-        <label>Your email: <input type="email" name="email"></label>
-        <label> Your message:<textarea name="message" rows="3"></textarea></label>
-        <div class="button-div">
-            <button type="submit" class="btn">Send</button>
-            <button type="reset" class="btn">Clear</button>
-        </div>
-        </form>
-    </div>
-    </div>
-  </section>
-</template>
-
-
-<script>
-export default {
-  data(){
-        return{
-            emailSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/email.png?raw=true',
-            instaSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/instagram.png?raw=true',
-            facebookSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/facebook.png?raw=true',
-            twitterSec: 'https://github.com/candice-dk3/artisanAura-images/blob/master/twitter.png?raw=true'
-        }
-      }
-}
-</script>
-
-
-<style scoped>
-.inner-contact-sec {
-  margin-top: 7.4rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  background-image: url('https://github.com/candice-dk3/artisanAura-images/blob/master/clouds.gif?raw=true');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  padding: 2rem;
-}
-.form-sec {
-    margin: 0 auto;
-    max-width: 40rem;
-    padding: 4rem;
-    background-color: transparent;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-radius: 2rem;
-}
-.form-sec label {
-    display: block;
-    margin-bottom: 1rem;
-    border-radius: 2rem;
- 
-}
-.form-sec input, .form-sec textarea {
-    display: block;
-    width: 32rem;
-    height: 2rem;
-    margin-bottom: 1rem;
-    border: none;
-    border-radius: 2rem;
-}
-.form-sec input:focus, .form-sec textarea:focus {
-    outline: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 2rem;
-  }
-.button-div {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 15rem;
-  gap: 20%;
-  justify-content: center;
-  margin: 0 auto;
-}
-.form-sec textarea {
-    height: 10rem;
-    resize: vertical;
-    border-radius: 2rem;
-}
-.btn{
-  background-color: #b19595;
-  color: #fff;
- 
-}
-.social-links{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 1rem;
-}
-.social-images{
-    text-align: end;
-    margin-right: 2rem;
-}
-.social-text{
-    text-align: start;
-}
-.email-text, .insta-text, .facebook-text, .twitter-text{
-    color: black;
-    font-weight: 700;
-    padding: 1.6rem;
-    margin-right: 1rem;
-}
-.email-image, .insta-image, .facebook-image, .twitter-image{
-    padding: 1rem;
-    margin-left: 2rem;
-}
-.insta-sec, .twitter-sec, .facebook-sec, .email-sec{
-  width: 3rem;
-}
-form{
-    padding: 0rem;
-}
-.find-h3{
-    color: black;
-    font-weight: 700;
-}
-@media screen and (max-width: 300px) {
-  .inner-contact-sec {
-  margin-top: 3.5rem;
-  grid-template-columns: repeat(1, 1fr);
-  padding: 2rem;
-  height: auto;
-}
-.form-sec {
-    margin: 0 auto;
-    max-width: 40rem;
-    padding: 0rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-radius: 2rem;
-}
-.form-sec label {
-    display: block;
-    margin-bottom: 1rem;
-    border-radius: 2rem;
-}
-.form-sec input, .form-sec textarea {
-    display: block;
-    width: 13rem;
-    height: 2rem;
-    margin-bottom: 1rem;
-    border: none;
-    border-radius: 2rem;
-    padding: 1rem;
-}
-.button-div {
-  width: 10rem;
-}
-.form-sec textarea {
-    height: 10rem;
-    resize: vertical;
-    border-radius: 2rem;
-}
-.social-links{
-  padding: 0rem;
-}
-.social-images{
-    text-align: end;
-    margin-right: 0rem;
-}
-.social-text{
-    text-align: start;
-}
-.email-text, .insta-text, .facebook-text, .twitter-text{
-    font-weight: 700;
-    padding: 0.56rem;
-    margin-right: 0rem;
-}
-.email-image, .insta-image, .facebook-image, .twitter-image{
-    padding: 0.26rem;
-    margin-left: 0rem;
-}
-.insta-sec, .twitter-sec, .facebook-sec, .email-sec{
-  width: 2rem;
-}
-form{
-    padding: 0rem;
-}
-.find-h3{
-    color: black;
-    font-weight: 700;
-}
- 
-}
-</style> -->
 <template>
   <section class="inner-contact-sec">
     <div class="container">
-      <h2>Let's get in touch</h2>
+      <h2 class="h2">Let's get in touch</h2>
       <div class="detail-Form-sec">
         <div class="details">
           <div class="address-sec">
@@ -257,8 +43,8 @@ form{
           </form>
         </div>
       </div>
+      <div class="spacer"></div>
     <div class="socials">
-      <h4>Find us on</h4>
         <div class="social-links">
           <div class="image">
             <a href="https://x.com/home?lang=en" target="_blank">
@@ -303,7 +89,6 @@ export default {
 </script>
 <style scoped>
 .inner-contact-sec {
-  margin-top: 7.4rem;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   background-image: url('https://github.com/candice-dk3/artisanAura-images/blob/main/clouds.gif?raw=true');
@@ -314,8 +99,15 @@ export default {
   padding: 2rem;
   color: black;
 }
+.container{
+  margin-top: 7rem;
+}
 .spacer{
   margin-top: 5rem;
+}
+.h2{
+  text-align: start;
+  padding: 2rem;
 }
 .detail-Form-sec{
   display: grid;

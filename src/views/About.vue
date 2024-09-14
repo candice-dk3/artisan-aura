@@ -39,38 +39,44 @@
             </div>
         </div>
         <div class="our-Team">
-            <h1>Meet our team</h1>
+            <h3 class="oT-text">Meet our team,
+                <br>
+                <small class="ot-textSmall">
+                    The people who ensure that you get the best quality supplies possible
+                </small>
+            </h3>
+            <!-- <h5 class="oT-text">The people who ensure that you get the best quality supplies possible</h5> -->
                 <div class="team-mate">
                     <div class="card-team" style="width: 16rem;">
                         <img :src="teamMember1" class="card-img-top" alt="">
                         <div class="card-body">
-                            <p class="team-text">Position: Store Manager</p><br>
-                            <p class="team-text">Name: Melisa Harris</p>
+                            <p class="team-text">Store Manager</p>
+                            <p class="team-text">Melisa Harris</p>
                         </div>
                     </div>
                     <div class="card" style="width: 16rem;">
                         <img :src="teamMember2" class="card-img-top" alt="">
                         <div class="card-body">
-                            <p class="team-text">Position: Sales Associate</p><br>
-                            <p class="team-text">Name: Emily Harris</p>
+                            <p class="team-text">Sales Associate</p>
+                            <p class="team-text">Emily Harris</p>
                         </div>
                     </div>
                     <div class="card" style="width: 16rem;">
                         <img :src="teamMember3" class="card-img-top" alt="">
                         <div class="card-body">
-                            <p class="team-text">Position: Inventory Specialist</p><br>
-                            <p class="team-text">Name: Arjun Colins</p>
+                            <p class="team-text">Inventory Specialist</p>
+                            <p class="team-text">Arjun Colins</p>
                         </div>
                     </div>
                 </div>
         </div>
         <div class="customer-feedback">
-            <h1>Our customer Feedback</h1>
+            <h3 class="cF-text">Here's what our customers have to say about us</h3>
             <div class="customer-card">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img :src="customerImage1" class="img-fluid rounded-start" alt="customer-image">
+                            <img :src="customerImage1" class="img-fluid" alt="customer-image">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -93,7 +99,7 @@
                 <div class="card mb-3 " style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img :src="customerImage2" class="img-fluid rounded-start" alt="customer-image">
+                            <img :src="customerImage2" class="img-fluid" alt="customer-image">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -103,7 +109,7 @@
                                     <img :src="star1" alt="" class="star">
                                     <img :src="star1" alt="" class="star">
                                     <img :src="star1" alt="" class="star">
-                                    <img :src="star1" alt="" class="star">
+                                    <img :src="star2" alt="" class="star">
                                 </p>
                                 <p class="card-text"><small class="text-body-secondary">The customer service is fantastic
                                     too—friendly, responsive, and helpful when I had questions about different mediums.
@@ -115,8 +121,6 @@
                 </div>
             </div>
         </div>
-
-
     </section>
 </template>
 <script>
@@ -124,9 +128,9 @@ export default {
     data(){
         return{
             image: 'https://github.com/candice-dk3/artisanAura-images/blob/main/movingPainting.gif?raw=true',
-            carousel1:'https://github.com/candice-dk3/artisanAura-images/blob/main/clouds.gif?raw=true',
-            carousel2:'',
-            carousel3:'https://github.com/candice-dk3/artisanAura-images/blob/main/womanPainting.gif?raw=true',
+            carousel1:'https://github.com/candice-dk3/artisanAura-images/blob/main/about2.jpg?raw=true',
+            carousel2:'https://github.com/candice-dk3/artisanAura-images/blob/main/about3.jpg?raw=true',
+            carousel3:'https://github.com/candice-dk3/artisanAura-images/blob/main/about1.jpg?raw=true',
             teamMember1:'https://github.com/candice-dk3/artisanAura-images/blob/main/manager1.png?raw=true',
             teamMember2:'https://github.com/candice-dk3/artisanAura-images/blob/main/manager2.png?raw=true',
             teamMember3:'https://github.com/candice-dk3/artisanAura-images/blob/main/manager3.png?raw=true',
@@ -140,13 +144,11 @@ export default {
 </script>
 <style scoped>
 .about-inner-sec{
-    margin-top: 7.4rem;
     color: black;
 }
-/* About Us Heading */
 .bg-image {
     width: 100%;
-    height: 30rem;
+    height: 40rem;
     object-fit: cover;
 }
 .welcome {
@@ -213,6 +215,19 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
 }
+.oT-text{
+    text-align: left;
+    margin-left: 3rem;
+    padding: 2rem;
+}
+.card-body{
+    padding: 1rem;
+}
+.small, small {
+    font-size: .575em;
+}
+
+
 /* Feedback */
 .customer-feedback{
     padding: 2rem;
@@ -227,6 +242,30 @@ export default {
 }
 .card-title{
     font-weight: bold;
+    text-align: start;
+}
+.img-fluid {
+    max-width: 6rem;
+    height: auto;
+    border-radius: 50%;
+    margin-top: 2rem;
+}
+.star{
+    width: 1.5rem;
+}
+.rating{
+    text-align: start;
+}
+.card-text, .text-body-secondary{
+    font-size: 0.6rem;
+    width: 26rem !important;
+    text-align: left;
+    margin-right: 2rem;
+}
+.cF-text{
+    text-align: left;
+    padding: 2rem;
+    margin-left: 2rem;
 }
 
 
@@ -284,10 +323,6 @@ export default {
 }
 .img-fluid {
     max-width: 32%;
-    height: auto;
-    border-radius: 20%;
 }
-
-
 }
 </style>
