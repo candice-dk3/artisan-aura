@@ -58,7 +58,7 @@
 
 <style scoped>
 .signup-inner-sec{
-    margin-top: 7.4rem;
+    margin-top: 5.4rem;
     color: black;
     margin-bottom: 2rem;
 }

@@ -2,7 +2,7 @@
   <section class="item">
     <div class="container-fluid ">
       <button @click="$router.push(`/items`)" class="continue-shopping">
-        <img :src="continueS" alt="" class="shopping">
+        <img :src="continueS" alt="" class="shopping" @click="addToCart(item)">
       </button>
       <div v-if="item()">
         <div class="item-card">
@@ -18,9 +18,6 @@
               <div class="price">
                 <p class="card-text">Price: R{{$store.state.item.itemPrice}}</p>
               </div>
-              <!-- <div class="purchase">
-                <button @click="purchaseAlert(item.itemName)" class="btn">Purchase</button>
-              </div> -->
             </div>
           </div>
         </div>
@@ -49,8 +46,12 @@ export default {
     item() {
       return this.$store.state.item;
     },
-    purchaseAlert(itemName) {
-      alert(`You have purchased ${itemName}`);
+    addToCart(item) {
+      if (item.quantity > item.itemQuantity) {
+        alert(`Only ${item.itemQuantity} items available in stock.`);
+      } else {
+        this.addToCart({ ...item, quantity: item.quantity });
+      }
     },
   },
   mounted() {
@@ -61,13 +62,12 @@ export default {
 
 <style scoped>
 .item {
-  margin-top: 7rem;
   color: black;
   padding: 1rem;
+  margin-top: 7.5rem;
 }
 
 .item-card {
-  padding: 6rem;
   position: relative;
 }
 
@@ -107,11 +107,6 @@ export default {
   text-align: left;
 }
 
-/* .pp {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-} */
-
 .item-img {
   width: 30rem;
   height: auto;
@@ -125,12 +120,11 @@ export default {
   width: 2rem;
   height: auto;
   z-index: 10;
+  cursor: pointer;
 }
 
 .desc-sec {
   width: 80rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
   margin: 0 auto;
   justify-content: center;
 }
@@ -140,41 +134,12 @@ export default {
   margin-left: 0;
 }
 
-.purchase {
-  text-align: right;
-}
-
-.purchase button.btn {
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: relative;
-}
-
-.purchase button.btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  border: 2px solid #4CAF50;
-  transition: width 0.3s ease;
-  border-radius: 0.5rem;
-}
-
-.purchase button.btn:hover::before {
-  width: 100%;
-}
-
 .continue-shopping {
   background-color: transparent;
   border: none;
-  font-size: 1.2rem;
+  font-size: 2rem;
   cursor: pointer;
+  margin-left: 80rem;
 }
 
 @media screen and (max-width: 300px) {
@@ -208,10 +173,6 @@ export default {
     margin-bottom: 1rem;
   }
 
-  .pp {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
   .price {
     text-align: left;
   }
@@ -226,5 +187,18 @@ export default {
     width: 100%;
     margin-top: 1rem;
   }
+  .continue-shopping {
+  font-size: 2rem;
+  margin-left: 10rem;
+  }
+  .icon {
+  left: 140px;
+  width: 1rem;
+  }
+  .desc-sec {
+  width:15rem;
+  margin: 0 auto;
+  justify-content: center;
+}
 }
 </style>

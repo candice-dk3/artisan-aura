@@ -6,15 +6,9 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img :src="paint" class="d-block w-100" alt="carousel-image">
-            <div class="carousel-caption">
-              <p>Need paint? We've got it!! <br><span>Shop Now at <strong>Artisan Aura</strong></span></p>
-            </div>
           </div>
           <div class="carousel-item">
             <img :src="brushes" class="d-block w-100" alt="carousel-image">
-            <div class="carousel-caption">
-              <p>Shop Now!!</p>
-            </div>
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -106,7 +100,7 @@ export default {
       return this.items
         .map(item => ({
           ...item,
-          quantity: 1, // Default item quantity to 1 for adding to cart
+          quantity: 0,
         }))
         .filter(item => item.itemName.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
           (this.selectedCategory === '' || item.itemCategory === this.selectedCategory))
@@ -245,7 +239,8 @@ export default {
   height: 30rem;
   text-align: center;
   padding: 1rem;
-  background-color: #9288C2;
+  border: none;
+  box-shadow: none;
   position: relative;
 }
 

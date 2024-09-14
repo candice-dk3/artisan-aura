@@ -44,7 +44,7 @@ export default {
 </script>
 <style scoped>
 .login-inner-sec{
-    margin-top: 7.4rem;
+    margin-top: 5.4rem;
 }
 .login-sec{
     padding: 2rem;

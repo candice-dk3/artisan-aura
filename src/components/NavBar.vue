@@ -130,7 +130,7 @@ export default {
       padding: 1rem;
     }
     .offcanvas-header{
-      background-color: #B692C2;
+      background-color: #b692c2;
     }
 }
 </style>

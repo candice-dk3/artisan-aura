@@ -5,7 +5,6 @@
                 <img :src="image" alt="Background-image" class="bg-image">
                 <div class="text-overlay">
                     <h2 class="h2-text">Artisan Aura</h2>
-                    <!-- <button class="btn" @click="$router.push('/Items')">SHOP NOW</button> -->
                 </div>
             </div>
             <div class="SBC">
@@ -128,13 +127,12 @@ export default {
 <style scoped>
 .home-sec {
     height: auto;
-    /* margin-top: 7.4rem; */
     color: black;
 }
 /* Welcome Sect */
 .bg-image {
     width: 100%;
-    height: 30rem;
+    height: 38rem;
     object-fit: cover;
 }
 .welcome {
@@ -165,7 +163,7 @@ export default {
     width: 100%;
     height: 100%;
     background-size: cover;
-    filter: blur(3px);
+    filter: blur(5px);
     z-index: -1;
 }
 /* Category Sect */
