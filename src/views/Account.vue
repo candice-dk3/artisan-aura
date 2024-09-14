@@ -4,7 +4,7 @@
         <div class="row center">
           <div class="card mt-5">
             {{ user }}
-            <!-- <div class="img">
+            <div class="img">
               <img :src="user.userProfilePicture" class="card-img-top" />
             </div>
             <div class="card-body">
@@ -16,13 +16,13 @@
               <div>
                 <p class="card-text">{{ user.userRole }}</p>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
         <router-link to="/logout">
-          <button id="log-in-button" class="mt-3" @click="logoutUser">
+          <button id="log-in-button" class="mt-3" @click="logOutUser">
             Log Out
           </button>
         </router-link>
@@ -36,8 +36,7 @@
 
 <script>
 import EditUser from '@/components/EditUser.vue';
-import { useCookies } from 'vue3-cookies';
-const { cookies } = useCookies();
+
 
 export default {
   components: {
@@ -80,7 +79,7 @@ export default {
         this.loading = false;
       }
     },
-    logoutUser() {
+    logOutUser() {
       cookies.remove('userInfo');
       this.$store.dispatch("logout");
       Swal.fire({

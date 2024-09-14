@@ -2,13 +2,13 @@
   <section class="item">
     <div class="container-fluid ">
       <button @click="$router.push(`/items`)" class="continue-shopping">
-        <img :src="continueS" alt="" class="shopping" @click="addToCart(item)">
+        <img :src="continueS" alt="" class="shopping" >
       </button>
       <div v-if="item()">
         <div class="item-card">
           <div class="item-image">
             <img :src="$store.state.item.itemURL" :alt="$store.state.item.itemName" class="item-img">
-            <img :src="addToCart" alt="" class="icon">
+            <img :src="addToCart" alt="" class="icon" @click.prevent="alertMessage()">
           </div>
           <div class="item-detail">
             <h1 class="item-name">{{$store.state.item.itemName}}</h1>
@@ -46,12 +46,8 @@ export default {
     item() {
       return this.$store.state.item;
     },
-    addToCart(item) {
-      if (item.quantity > item.itemQuantity) {
-        alert(`Only ${item.itemQuantity} items available in stock.`);
-      } else {
-        this.addToCart({ ...item, quantity: item.quantity });
-      }
+    alertMessage() {
+      alert('You\'ve purchased this item!');
     },
   },
   mounted() {

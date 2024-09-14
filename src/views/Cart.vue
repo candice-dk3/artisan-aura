@@ -1,6 +1,5 @@
 <template>
   <section class="cart-sec">
-    <div v-if="loading">Loading...</div>
     <div v-if="!loading && cart.length > 0">
       <div v-for="item in cart" :key="item.itemID" class="cart-item">
         <img :src="item.itemURL" :alt="item.itemName" width="100" height="auto">
@@ -14,10 +13,8 @@
           </div>
           <button @click="removeFromCart(item.itemID)">Remove</button>
         </div>
-        <!-- Total Price for each item -->
         <p>Total Price: R{{ item.itemPrice * item.quantity }}</p>
       </div>
-      <!-- Total Price of the entire cart -->
       <p>Total Cart Price: R{{ totalPrice }}</p>
     </div>
     <div v-else>
@@ -37,37 +34,30 @@ export default {
     const loading = ref(false);
     const error = ref('');
 
-    // Increase item quantity
     const increaseQuantity = (item) => {
       if (typeof newItemQuantity === 'function') {
-        newItemQuantity(item.itemID, item.quantity + 1); // Update API and cart
-        item.quantity += 1; // Update locally after API
+        newItemQuantity(item.itemID, item.quantity + 1);
+        item.quantity += 1;
       } else {
         console.error('newItemQuantity is not a function');
       }
     };
-
-    // Decrease item quantity
     const decreaseQuantity = (item) => {
       if (item.quantity > 1 && typeof newItemQuantity === 'function') {
-        newItemQuantity(item.itemID, item.quantity - 1); // Update API and cart
-        item.quantity -= 1; // Update locally after API
+        newItemQuantity(item.itemID, item.quantity - 1);
+        item.quantity -= 1;
       } else {
         console.error('newItemQuantity is not a function or invalid quantity');
       }
     };
-
-    // Remove item from cart
     const removeFromCart = async (itemID) => {
       try {
-        await removeItem(itemID); // Send delete request to API
-        cart.value = cart.value.filter(item => item.itemID !== itemID); // Update locally
+        await removeItem(itemID);
+        cart.value = cart.value.filter(item => item.itemID !== itemID);
       } catch (error) {
         console.error('Error removing item from cart:', error);
       }
     };
-
-    // Fetch cart items on mount
     onMounted(async () => {
       loading.value = true;
       try {
@@ -79,8 +69,6 @@ export default {
         loading.value = false;
       }
     });
-
-    // Total price of the entire cart
     const totalPrice = computed(() => {
       return cart.value.reduce((acc, item) => acc + item.itemPrice * item.quantity, 0);
     });

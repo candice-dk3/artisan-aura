@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="'#adminEditUser'+user.userID"><img :src="edit" alt=""></button>
+        <button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="'#adminEditUser'+user.userID"><img :src="edit" alt="" class="edit"></button>
         <div class="modal fade" :id="'adminEditUser'+user.userID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -62,16 +62,14 @@ export default {
 }
 </script>
 <style scoped>
-    .btn {
-    color: white;
+.edit {
     background-color: #ffc400;
-    margin-top: 40px;
     border: none;
+    width: 2rem;
+    border-radius: 0.4rem;
 }
 
-button.btn:hover {
+.edit:hover {
     background-color: #e2b65f;
-    color: white;
-    border: none;
 }
 </style>

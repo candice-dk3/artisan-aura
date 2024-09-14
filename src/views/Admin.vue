@@ -6,9 +6,9 @@
                     <h2 class="h2-text">Admin</h2>
                 </div>
             </div>
-        <button  type="button" class="btn" data-bs-toggle="modal"
-            data-bs-target="#adminAddItem">Add New Item</button>
             <div class="admin-page-table">
+                <div class="spacer"></div>
+                <h2 class="h2">Product Table</h2>
                 <table class="table table-responsive">
                     <thead class="table-group-divider">
                         <tr>
@@ -31,16 +31,18 @@
                         <td>{{ item.itemDesc }}</td>
                         <td>{{ item.itemPrice }}</td>
                         <td>{{ item.itemQuantity }}</td>
-                        <td>
+                        <td class="action">
                             <edit-item :item="item"/>
-                            <button @click="deleteItem(item)" class="btn btn-outline-danger"><img :src="deleteLogo" alt=""></button>
+                            <button @click="deleteItem(item)" class="btn"><img :src="deleteLogo" alt="" class="edit"></button>
                         </td>
                         </tr>
                     </tbody>
                 </table>
+                <button  type="button" class="btn" data-bs-toggle="modal" data-bs-target="#adminAddItem">Add New Item</button>
             </div>
-            <button  type="button" class="btn" data-bs-toggle="modal" data-bs-target="#adminAddUser">Add New User</button>
             <div class="user-page-table">
+                <div class="spacer"></div>
+                <h2 class="h2">Users Table</h2>
                 <table class="table table-responsive">
                     <thead class="table-group-divider">
                         <tr>
@@ -63,12 +65,16 @@
                         <td>{{ user.userProfile }}</td>
                         <td>{{ user.emailAdd }}</td> 
                         <td>{{ user.userPass }}</td> 
+                        <td class="action">
                             <edit-user :user="user"/>
-                            <button @click="deleteUser(user)" class="btn btn-outline-danger"><img :src="deleteLogo" alt=""></button>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            <button @click="deleteUser(user)" class="btn"><img :src="deleteLogo" alt="" class="edit"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button  type="button" class="btn" data-bs-toggle="modal" data-bs-target="#adminAddUser">Add New User</button>
+        </div>
+        <div class="spacer"></div>
         <!-- Add New Item Modal -->
         <div class="modal fade" id="adminAddItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="addItemLabel" aria-hidden="true">
@@ -211,12 +217,12 @@ export default {
 
 <style scoped>
 .inner-admin {
-    margin-top: 6.9rem;
+    /* margin-top: 6.9rem; */
     color: black;
 }
 .bg-image {
     width: 100%;
-    height: 30rem;
+    height: 40rem;
     object-fit: cover;
 }
 .welcome {
@@ -255,62 +261,54 @@ export default {
     background-color: transparent;
 }
 .table {
-    width: 80rem;
+    width: 90rem;
     margin-top: 1rem;
     background-color: transparent;
 }
-.table th,
-.table td {
+.table th, .table td {
     text-align: left;
     justify-content: center;
     align-content: center;
-    background-color: rgba(200, 200, 200, 0.166);
+    background-color: rgba(200, 200, 200, 0.13);
     border: none;
 }
-
 .admin-page-table, .user-page-table {
     width: auto;
     display: grid;
     justify-content: center;
 }
-
-.quantity-buttons {
-    display: flex;
-    align-items: center;
-}
-
-.total-amount {
-    text-align: end;
-}
-
-.btn {
-    color: white;
+.edit {
     background-color: #ffc400;
-    margin-top: 40px;
     border: none;
-    /* margin-left: 200px; */
+    width: 2rem;
+    border-radius: 0.4rem;
 }
 
-button.btn:hover {
+.edit:hover {
     background-color: #e2b65f;
-    color: white;
-    border: none;
 }
-
-.products-sec {
-    display: grid;
-    justify-content: space-around;
+.action{
+    display: flex;
 }
 
 .img-fluid {
     max-width: 100px;
     height: auto;
 }
+.h2{
+    text-align: start;
+    font-weight: 900;
+}
+.spacer{
+    margin-top: 2rem;
+}
+.btn{
+    background-color: #ffc400;
+}
 
 @media screen and (max-width: 300px) {
-    .inner-admin {
-        margin-top: 3.5rem;
-    /* background-image: url(https://github.com/demilee06/Node-Images/blob/main/5616868-hd_2048_1080_25fps-ezgif.com-optimize.gif?raw=true); */
+.inner-admin {
+    margin-top: 3.5rem;
     background-size: contain
 }
 .admin-page-table, .user-page-table {

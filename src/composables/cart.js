@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
-import axios from 'axios'; // Ensure axios is imported
+import axios from 'axios';
 
 const cart = ref([]);
 const apiURL = 'https://artisan-aura.onrender.com/';

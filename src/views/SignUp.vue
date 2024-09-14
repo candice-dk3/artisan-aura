@@ -123,10 +123,10 @@
   text-decoration: none;
 }
 .login-button {
-  justify-self: center; /* add this property to center the button horizontally */
+  justify-self: center;
   display: block;
-  width: 20rem; /* keep the fixed width */
-  margin: 20px auto; /* add auto margin to center the button */
+  width: 20rem;
+  margin: 20px auto;
   font-weight: bold;
   background: linear-gradient(45deg, #B692C2 0%, #B692C2 100%);
   color: white;
@@ -135,7 +135,7 @@
   box-shadow: #feedb5 0px 20px 10px -15px;
   border: none;
   transition: all 0.2s ease-in-out;
-  text-align: center; /* add this property to center the button text */
+  text-align: center;
 }
 .form .login-button:hover {
   transform: scale(1.03);

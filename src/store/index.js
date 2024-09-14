@@ -16,14 +16,6 @@ export default createStore({
     cart: [],
     item: null,
     user: null,
-    // user: {
-    //   userID: null,
-    //   userName: '',
-    //   userAge: '',
-    //   Gender: '',
-    //   emailAdd: '',
-    //   profilePicture: ''
-    // }
   },
   getters:{
     user: (state) => state.user,
@@ -217,7 +209,7 @@ export default createStore({
           position: "top-center",
           dangerouslyHTMLString: true
         });
-        router.push('/'); // redirect to login page
+        router.push('/');
       } catch (error) {
         console.error('Error logging out:', error);
       }
