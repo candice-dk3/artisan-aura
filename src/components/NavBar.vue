@@ -57,8 +57,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 20px;
-  background-color: #b692c262;
-  backdrop-filter: blur(10px);
 }
 
 .offcanvas-body a {
@@ -74,19 +72,16 @@ export default {
 
 .offcanvas-body a.router-link-exact-active {
   color: #ffc400;
-  /* transition-duration: 2sec; */
 }
 .navbar{
   background-color: #b692c262;
   width: 100%;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
 }
 .navbar-nav {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
-  backdrop-filter: blur(10px);
-  background-color: #b692c262;
 }
 .navbar-expand-sm .navbar-nav .nav-link {
   padding-right: 20px;
@@ -104,7 +99,6 @@ export default {
 .f-nav{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  backdrop-filter: blur(10px);
   padding: 1rem;
 }
 .navbar-nav .nav-link {

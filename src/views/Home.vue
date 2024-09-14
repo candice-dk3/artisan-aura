@@ -128,7 +128,7 @@ export default {
 <style scoped>
 .home-sec {
     height: auto;
-    margin-top: 7.4rem;
+    /* margin-top: 7.4rem; */
     color: black;
 }
 /* Welcome Sect */
