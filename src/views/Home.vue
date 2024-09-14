@@ -100,9 +100,9 @@ export default {
             categoryPBrushes: 'https://github.com/candice-dk3/artisanAura-images/blob/main/paintbrush-picture-2.png?raw=true',
             categoryCanvas: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/main/canvas.webp',
             categoryStationary: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/main/stationary.webp',
-            carouselImage1: '',
-            carouselImage2: '',
-            carouselImage3: '',
+            carouselImage1: 'https://github.com/candice-dk3/artisanAura-images/blob/main/adminPage.jpg?raw=true',
+            carouselImage2: 'https://github.com/candice-dk3/artisanAura-images/blob/main/carousel1.jpg?raw=true',
+            carouselImage3: 'https://github.com/candice-dk3/artisanAura-images/blob/main/carousel3.jpg?raw=true',
             bestSellingItems: [
                 {
                     itemURL: 'https://raw.githubusercontent.com/candice-dk3/artisanAura-images/main/paintbrush-kit-2.webp',
