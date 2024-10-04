@@ -20,9 +20,9 @@
               <div class="f-nav">
                   <router-link to="/" class="nav-link" @click="closeNavbar">Home</router-link>
                   <router-link to="/Items" class="nav-link" @click="closeNavbar">Shop</router-link>             
-                  <router-link to="/Cart" class="nav-link" @click="closeNavbar"><img :src="cartLogo" alt="CK" class="cartLogo"/></router-link>
-                  <router-link to="/SignUp" class="nav-link" @click="closeNavbar"><img :src="signUp" alt="CK" class="signUp"/></router-link>
-                  <router-link to="/LogIn" class="nav-link" @click="closeNavbar"><img :src="logIn" alt="CK" class="logIn"/></router-link>
+                  <router-link to="/Cart" class="nav-link" @click="closeNavbar">Cart</router-link>
+                  <router-link to="/SignUp" class="nav-link" @click="closeNavbar">Sign Up</router-link>
+                  <router-link to="/LogIn" class="nav-link" @click="closeNavbar">Log In</router-link>
                   <router-link to="/Account" class="nav-link" @click="closeNavbar"><img :src="acclogo" alt="CK" class="acclogo"/></router-link></div>
             </div>
           </div>
@@ -39,9 +39,6 @@ export default {
     return {
       logo:'https://github.com/candice-dk3/artisanAura-images/blob/main/AALogo.png?raw=true',
       acclogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/user.png?raw=true',
-      cartLogo:'https://github.com/candice-dk3/artisanAura-images/blob/main/cart1.png?raw=true',
-      signUp: 'https://github.com/candice-dk3/artisanAura-images/blob/main/signUp.png?raw=true',
-      logIn: 'https://github.com/candice-dk3/artisanAura-images/blob/main/LogIn.png?raw=true'
     }
   },
   methods: {
