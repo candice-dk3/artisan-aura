@@ -306,7 +306,7 @@ export default {
     background-color: #ffc400;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 390px) {
 .inner-admin {
     margin-top: 3.5rem;
     background-size: contain

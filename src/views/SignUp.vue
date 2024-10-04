@@ -154,7 +154,7 @@
   color: #ffc400;
   font-size: 9px;
 }
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 390px) {
 .container {
   max-width: 15rem;
   padding: 0rem;

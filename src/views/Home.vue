@@ -309,7 +309,7 @@ export default {
     background-color: #B692C2;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 390px) {
 .home-sec {
     margin-top: 3.5rem;
 }

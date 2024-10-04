@@ -242,4 +242,11 @@ a {
   display: flex;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 390px){
+  .detail-Form-sec{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+}
 </style>

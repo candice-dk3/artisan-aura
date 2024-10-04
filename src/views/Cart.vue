@@ -15,20 +15,20 @@
         <div class="top-details">
           <h4 class="IN-text">{{ item.itemName }}</h4>
           <div class="quantity-buttons">
-            <button @click="decreaseQuantity(item)">-</button>
+            <button @click="decreaseQuantity(item)" class="btn">-</button>
             <span>{{ item.quantity }}</span>
-            <button @click="increaseQuantity(item)">+</button>
+            <button @click="increaseQuantity(item)" class="btn">+</button>
           </div>
           <h5>R{{ item.itemPrice }}</h5>
         </div>
         <div class="bottom-details">
           <h5 class="BD-text">Total: R{{ item.itemPrice * item.quantity }}</h5>
-          <button @click="removeFromCart(item)">Remove</button>
+          <button @click="removeFromCart(item)" class="btn1">Remove</button>
         </div>
       </div>
-      <div class="clear-cart">
-        <button class="btn" @click="clearCart">Clear Cart</button>
-      </div>
+    </div>
+    <div class="clear-cart">
+      <button class="btn" @click="clearCart">Clear Cart</button>
     </div>
     <div class="spacer"></div>
     <div class="total-sec">
@@ -86,9 +86,9 @@ export default {
 }
 
 .bg-image {
-    width: 100%;
-    height: 38rem;
-    object-fit: cover;
+  width: 100%;
+  height: 38rem;
+  object-fit: cover;
 }
 .welcome {
     background-size: cover;
@@ -98,23 +98,23 @@ export default {
     font-size: 6rem;
 }
 .text-overlay {
-    position: absolute;
-    top: 38%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: black;
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: black;
 }
 .text-overlay::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    filter: blur(3px);
-    z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  filter: blur(3px);
+  z-index: -1;
 }
 
 .items-card{
@@ -131,22 +131,26 @@ export default {
   text-align: left;
 }
 .bottom-details{
-  text-align: right;
-  margin-right: 4rem;
-  padding: 2rem;
+  text-align: left;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  width: 20rem;
+}
+.item-picture, .item-details{
+  width: 18rem;
 }
 .itemImage{
-  width: 14rem;
+  /* width: 14rem; */
   height: 12rem;
   object-fit: cover;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 4rem;
+  /* display: flex;
+  justify-content: flex-start; */
+  /* margin-left: 4rem; */
 }
 .IN-text{
   font-size: 1.7rem;
   margin-right: 10rem;
-  width: 35rem;
+  /* width: 35rem; */
 }
 .total-sec{
   text-align: left;
@@ -154,18 +158,47 @@ export default {
   grid-template-columns: repeat(2, 1fr);
   padding: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 80%;
-  max-width: 70rem;
+  width: 20rem;
+  max-width: 30rem;
   margin: 0 auto;
 }
-
+.btn{
+  border: none;
+}
+.btn1{
+  border: none;
+  text-align: start;
+  background-color: transparent;
+  width: 1rem;
+}
 .spacer{
   margin-top: 5rem;
 }
-@media screen and (max-width: 300px) {
-.cart-sec{
-  margin-top: 3.5rem;
+@media screen and (max-width: 390px) {
+  .items-card{
+  grid-template-columns: repeat(1, 1fr);
+  width: 20rem;
+  max-width: 30rem;
 }
- 
+.bg-image {
+  height: 20rem;
+}
+.h1-text {
+  font-size: 4rem;
+}
+.text-overlay {
+  top: 22%;
+}
+.total-sec{
+  grid-template-columns: repeat(1, 1fr);
+}
+/* .itemImage{
+  margin-left: 1.7rem;
+} */
+.IN-text{
+  font-size: 1.2rem;
+  margin-right: 0rem;
+  margin-top: 1rem;
+}
 }
 </style>

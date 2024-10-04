@@ -269,7 +269,7 @@ export default {
 }
 
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 390px) {
 .about-inner-sec{
     margin-top: 3rem;
     color: black;

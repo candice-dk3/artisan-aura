@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="copyright-text">
-            <h4 class="h4-footer">Copyright @ Artisan Aura {{ new Date().getFullYear() }} | All Rights Reserved</h4>
+            <h4 class="h4-footer">@ Artisan Aura {{ new Date().getFullYear() }} | All Rights Reserved</h4>
         </div>
     </footer>
 </template>
@@ -101,7 +101,7 @@ a{
 }
 
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 390px) {
 .h4-footer{
     color: white;
     padding: 2rem;

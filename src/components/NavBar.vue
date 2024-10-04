@@ -102,32 +102,37 @@ export default {
   padding-right: 1rem;
   padding-left: 1rem;
 }
-@media screen and (max-width: 300px) {
-      .offcanvas-body a {
-      font-size: 1.3rem;
-      padding: 1rem;
-    }
-      .navbar-nav {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      width: 100%;
-      height: auto;
-      }
-      .s-nav{
-        display: none;
-      }
-      .f-nav{
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-    }
-    nav a {
-      font-weight: bold;
-      font-size: 20px;
-      text-decoration: none;
-      padding: 1rem;
-    }
-    .offcanvas-header{
-      background-color: #b692c2;
-    }
+@media screen and (max-width: 390px) {
+.offcanvas-body {
+  grid-template-columns: repeat(1, 1fr);
+  overflow-y: visible;
+  background-color: #b692c2;
+}
+.offcanvas-body a {
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+.navbar-nav {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  height: 100%;
+}
+.s-nav{
+  display: none;
+}
+.f-nav{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+nav a {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 1rem;
+}
+.offcanvas-header{
+  background-color: #b692c2;
+}
 }
 </style>
