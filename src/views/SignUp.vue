@@ -13,9 +13,8 @@
               <input required class="input" type="text" name="ProfilePicture" id="ProfilePicture" placeholder="Profile Picture" v-model="userProfilePicture"/>
               <input required class="input" type="email" name="email" id="email" placeholder="E-mail" v-model="emailAdd"/>
               <input required class="input" type="password" name="password" id="password" placeholder="Password" v-model="userPass"/>
-              
-              <input class="login-button" type="reset" value="Clear" />
-              <input class="login-button" type="submit" value="Sign In" />
+              <input class="login-button" type="reset" value="Clear"/>
+              <input class="login-button" type="submit" value="Sign In"/>
             </form>
             <span class="agreement"><a href="#">Learn user licence agreement</a></span>
           </div>
@@ -58,9 +57,9 @@
 
 <style scoped>
 .signup-inner-sec{
-    margin-top: 5.4rem;
-    color: black;
-    margin-bottom: 2rem;
+  margin-top: 5.4rem;
+  color: black;
+  margin-bottom: 2rem;
 }
 .signUp-sec{
   padding: 2rem;

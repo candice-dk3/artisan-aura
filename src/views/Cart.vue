@@ -1,140 +1,171 @@
 <template>
   <section class="cart-sec">
-    <div v-if="!loading && cart.length > 0">
-      <div v-for="item in cart" :key="item.itemID" class="cart-item">
-        <img :src="item.itemURL" :alt="item.itemName" width="100" height="auto">
-        <div>
-          <h4>{{ item.itemName }}</h4>
-          <p>Price: R{{ item.itemPrice }}</p>
-          <div class="quantity-container">
+    <div class="welcome">
+      <img :src="image" alt="Background-image" class="bg-image" />
+      <div class="text-overlay">
+        <h1 class="h1-text">Your Cart</h1>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="items-card" v-for="item in cart" :key="item.id">
+      <div class="item-picture">
+        <img :src="item.itemURL" alt="Item Image" class="itemImage" />
+      </div>
+      <div class="item-details">
+        <div class="top-details">
+          <h4 class="IN-text">{{ item.itemName }}</h4>
+          <div class="quantity-buttons">
             <button @click="decreaseQuantity(item)">-</button>
             <span>{{ item.quantity }}</span>
             <button @click="increaseQuantity(item)">+</button>
           </div>
-          <button @click="removeFromCart(item.itemID)">Remove</button>
+          <h5>R{{ item.itemPrice }}</h5>
         </div>
-        <p>Total Price: R{{ item.itemPrice * item.quantity }}</p>
+        <div class="bottom-details">
+          <h5 class="BD-text">Total: R{{ item.itemPrice * item.quantity }}</h5>
+          <button @click="removeFromCart(item)">Remove</button>
+        </div>
       </div>
-      <p>Total Cart Price: R{{ totalPrice }}</p>
+      <div class="clear-cart">
+        <button class="btn" @click="clearCart">Clear Cart</button>
+      </div>
     </div>
-    <div v-else>
-      <p>Your cart is empty.</p>
+    <div class="spacer"></div>
+    <div class="total-sec">
+      <h4>Your Total: R{{ totalCartPrice }}</h4>
+      <button class="btn">Proceed to Checkout</button>
     </div>
+    <div class="spacer"></div>
   </section>
 </template>
 
 <script>
-import axios from 'axios';
-import { computed, ref, onMounted } from 'vue';
-import { useCart } from '../composables/cart';
+import { computed } from 'vue';
+import { useCart } from '@/composables/cart.js';
 
 export default {
+  data() {
+    return {
+      image: 'https://github.com/candice-dk3/artisanAura-images/blob/main/clouds.gif?raw=true',
+    };
+  },
   setup() {
-    const { cart, newItemQuantity, removeFromCart: removeItem } = useCart();
-    const loading = ref(false);
-    const error = ref('');
-
-    const increaseQuantity = (item) => {
-      if (typeof newItemQuantity === 'function') {
-        newItemQuantity(item.itemID, item.quantity + 1);
-        item.quantity += 1;
-      } else {
-        console.error('newItemQuantity is not a function');
-      }
-    };
-    const decreaseQuantity = (item) => {
-      if (item.quantity > 1 && typeof newItemQuantity === 'function') {
-        newItemQuantity(item.itemID, item.quantity - 1);
-        item.quantity -= 1;
-      } else {
-        console.error('newItemQuantity is not a function or invalid quantity');
-      }
-    };
-    const removeFromCart = async (itemID) => {
-      try {
-        await removeItem(itemID);
-        cart.value = cart.value.filter(item => item.itemID !== itemID);
-      } catch (error) {
-        console.error('Error removing item from cart:', error);
-      }
-    };
-    onMounted(async () => {
-      loading.value = true;
-      try {
-        const response = await axios.get('https://artisan-aura.onrender.com/users/carts');
-        cart.value = response.data;
-      } catch (err) {
-        error.value = err.message;
-      } finally {
-        loading.value = false;
-      }
-    });
-    const totalPrice = computed(() => {
+    const { cart} = useCart();
+    const totalCartPrice = computed(() => {
       return cart.value.reduce((acc, item) => acc + item.itemPrice * item.quantity, 0);
     });
+    const increaseQuantity = (item) => {
+    item.quantity++;
+  };
 
-    return { cart, increaseQuantity, decreaseQuantity, removeFromCart, loading, error, totalPrice };
+  const decreaseQuantity = (item) => {
+    if (item.quantity > 1) {
+      item.quantity--;
+    }
+  };
+  const removeFromCart = (item) => {
+    const index = cart.value.indexOf(item);
+    if (index !== -1) {
+      cart.value.splice(index, 1);
+    }
+  };
+  const clearCart = () => {
+  if (confirm("Are you sure you want to clear the cart?")) {
+    cart.value.splice(0, cart.value.length);
+    alert("Cart has been cleared!");
+    }
+  };
+  return { cart, removeFromCart, totalCartPrice, increaseQuantity, decreaseQuantity, clearCart };
   },
 };
 </script>
 
 <style scoped>
-  .quantity-container {
-    display: flex;
-    align-items: center;
-  }
-  .quantity-container button {
-    margin: 0 5px;
-  }
-</style>
-
-<style scoped>
-.cart-sec {
-  margin-top: 7.4rem;
-  padding: 1rem;
+.cart-sec{
   color: black;
 }
 
-.cart-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+.bg-image {
+    width: 100%;
+    height: 38rem;
+    object-fit: cover;
+}
+.welcome {
+    background-size: cover;
+}
+.h1-text {
+    color: white;
+    font-size: 6rem;
+}
+.text-overlay {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+}
+.text-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    filter: blur(3px);
+    z-index: -1;
+}
+
+.items-card{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding: 1rem;
-  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 70rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
-
-.cart-item img {
-  margin-right: 1rem;
+.top-details{
+  text-align: left;
 }
-
-.quantity-container {
+.bottom-details{
+  text-align: right;
+  margin-right: 4rem;
+  padding: 2rem;
+}
+.itemImage{
+  width: 14rem;
+  height: 12rem;
+  object-fit: cover;
   display: flex;
-  align-items: center;
-  margin: 1rem 0;
+  justify-content: flex-start;
+  margin-left: 4rem;
+}
+.IN-text{
+  font-size: 1.7rem;
+  margin-right: 10rem;
+  width: 35rem;
+}
+.total-sec{
+  text-align: left;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 70rem;
+  margin: 0 auto;
 }
 
-.quantity-container button {
-  background-color: #1a9471;
-  color: white;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
+.spacer{
+  margin-top: 5rem;
 }
-
-.quantity-container button:hover {
-  background-color: #f5e883;
+@media screen and (max-width: 300px) {
+.cart-sec{
+  margin-top: 3.5rem;
 }
-
-button {
-  border: none;
-  padding: 0.5rem 1rem;
-  background-color: #1a9471;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #f5e883;
+ 
 }
 </style>

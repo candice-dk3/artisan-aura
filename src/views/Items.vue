@@ -77,7 +77,7 @@
 <script>
 import Card from '@/components/Card.vue';
 import axios from 'axios';
-import { useCart } from '../composables/cart';
+import { useCart } from '../composables/cart.js';
 
 export default {
   components: {

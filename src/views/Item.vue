@@ -8,7 +8,7 @@
         <div class="item-card">
           <div class="item-image">
             <img :src="$store.state.item.itemURL" :alt="$store.state.item.itemName" class="item-img">
-            <img :src="addToCart" alt="" class="icon" @click.prevent="alertMessage()">
+            <img :src="addToCart" alt="" class="icon" @click="addToCart(item)">
           </div>
           <div class="item-detail">
             <h1 class="item-name">{{$store.state.item.itemName}}</h1>
@@ -32,12 +32,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { useCart } from '../composables/cart.js';
 export default {
   data() {
     return {
       continueS: 'https://github.com/candice-dk3/artisanAura-images/blob/main/go-back.png?raw=true',
       addToCart: 'https://github.com/candice-dk3/artisanAura-images/blob/main/purchase.png?raw=true',
     };
+  },
+  setup() {
+    const { addToCart } = useCart();
+    return { addToCart };
   },
   methods: {
     getItem() {
@@ -46,8 +52,12 @@ export default {
     item() {
       return this.$store.state.item;
     },
-    alertMessage() {
-      alert('You\'ve purchased this item!');
+    addToCart(item) {
+      if (item.quantity > item.itemQuantity) {
+        alert(`Only ${item.itemQuantity} items available in stock.`);
+      } else {
+        this.addToCart({ ...item, quantity: item.quantity });
+      }
     },
   },
   mounted() {
@@ -111,14 +121,16 @@ export default {
 
 .icon {
   position: absolute;
-  top: 20px;
-  left: 800px;
+  top: 30px;
+  left: 1080px;
   width: 2rem;
   height: auto;
   z-index: 10;
   cursor: pointer;
 }
-
+.shopping{
+  width: 2rem;
+}
 .desc-sec {
   width: 80rem;
   margin: 0 auto;
@@ -135,7 +147,7 @@ export default {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  margin-left: 80rem;
+  margin-left: 100rem;
 }
 
 @media screen and (max-width: 300px) {
